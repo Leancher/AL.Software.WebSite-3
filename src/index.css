@@ -1,0 +1,268 @@
+:root {
+  --MyYellow: #f2d13e;
+  --MyDarkGrey: #3e454c;
+  --MyMiddleGrey: #828282;
+  --MyLightGrey: #f6f6f6;
+  --GlobalFont: Calibri;
+}
+
+.container {
+  min-width: 540px;
+  font-family: var(--GlobalFont);
+  height: 100%;
+}
+
+.header {
+  background-color: var(--MyYellow);
+  height: 108px;
+}
+
+.HeaderTitle {
+  padding-left: 18px;
+}
+
+.HeaderTitle a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: var(--GlobalFont);
+  font-weight: bold;
+  font-size: 72px;
+  color: var(--MyDarkGrey);
+  text-decoration: none;
+}
+
+.HeaderTitle img {
+  display: inline-block;
+}
+
+.HeaderMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding-right: 18px;
+}
+
+.HeaderMenu a {
+  font: bold 1.1em var(--GlobalFont);
+  color: var(--MyDarkGrey);
+  text-decoration: none;
+}
+
+.TileGrid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+
+.ContentBlock {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.ContentCaption {
+  padding-right: 0px;
+  padding-left: 0px;
+  text-align: center;
+  font-family: var(--GlobalFont);
+  font-weight: bold;
+  font-size: 36px;
+  background-color: var(--MyLightGrey);
+  height: 54px;
+  width: 100%;
+}
+
+.ContentColumn {
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.TileCell {
+  width: 227px;
+  margin-left: 18px;
+  margin-right: 18px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.TileCell a {
+  font: bold 16px var(--GlobalFont);
+  color: white;
+  text-decoration: none;
+}
+
+.TileCell a:hover {
+  color: var(--MyYellow);
+}
+
+.TileCellPic {
+  text-align: center;
+  background-color: var(--MyLightGrey);
+}
+
+.TileCellPic img {
+  vertical-align: middle;
+}
+
+.TileCellCaption {
+  text-align: center;
+  line-height: 18px;
+  background-color: var(--MyDarkGrey);
+  padding-top: 3px;
+  padding-bottom: 9px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.PhotoPlace {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.PhotoCell {
+  width: 142px;
+  margin-top: 18px;
+  margin-left: 9px;
+  margin-right: 9px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.PhotoCell a {
+  text-decoration: none;
+}
+
+.PhotoCell a:hover {
+  color: var(--MyYellow);
+}
+
+.CurrentPhoto {
+  display: inline-block;
+  margin: 0 auto;
+  margin-top: 18px;
+}
+
+.no-gutters {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+/* Если меньше 1200 */
+@media (max-width: 1200px) {
+  .CurrentPhoto {
+    width: 100%;
+  }
+  .ContentBlock {
+    padding-left: 32px;
+    margin-left: 0px;
+  }
+  .MenuList a {
+    justify-content: flex-start;
+  }
+  .BtLeftPlace {
+    line-height: 50vh;
+  }
+  .BtRightPlace {
+    height: 40vh;
+  }
+}
+/* Если больше 1200 */
+@media (min-width: 1201px) {
+  .CurrentPhoto {
+    height: 68vh;
+  }
+  .ContentBlock {
+    margin-left: 0px;
+  }
+  .MenuList a {
+    justify-content: center;
+  }
+  .BtLeftPlace {
+    line-height: 60vh;
+  }
+  .BtRightPlace {
+    height: 50vh;
+  }
+}
+
+/* Если меньше 576px */
+@media (max-width: 576px) {
+  .hideDropMenu {
+    display: block;
+  }
+  .hideMainMenu {
+    display: none;
+  }
+}
+
+/* Если больше 576px */
+@media (min-width: 576px) {
+  .hideDropMenu {
+    display: none;
+  }
+  .hideMainMenu {
+    display: block;
+  }
+}
+
+.MenuList {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.MenuList a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 18px;
+  text-decoration: none;
+  font: bold 1.1em var(--GlobalFont);
+  background-color: var(--MyLightGrey);
+  color: Black;
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+
+.MenuList a:hover {
+  background-color: var(--MyDarkGrey);
+  color: var(--MyYellow);
+}
+
+.TextLink {
+  cursor: "pointer";
+  font-weight: bold;
+  color: var(--MyMiddleGrey);
+}
+
+.TextLink:hover {
+  color: var(--MyDarkGrey);
+}
+
+.BtPlace {
+  margin-top: 18px;
+  width: 50px;
+  display: inline-block;
+}
+
+.BtLeftPlace {
+  margin-right: 5px;
+}
+
+.BtRightPlace {
+  margin-left: 5px;
+}
+
+.BtNext {
+  height: 100%;
+  display: flex;
+}
+
+.BtNext img {
+  margin: auto;
+}
