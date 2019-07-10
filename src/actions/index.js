@@ -1,4 +1,4 @@
-let nextTodoId = 0;
+let nextTodoId = 1;
 export const addTodo = text => ({
   type: "ADD_TODO",
   id: nextTodoId++,
@@ -10,10 +10,13 @@ export const setVisibilityFilter = filter => ({
   filter
 });
 
-export const toggleTodo = id => ({
-  type: "TOGGLE_TODO",
-  id
-});
+export const toggleTodo = id => {
+  console.log("toggleTodo");
+  return {
+    type: "TOGGLE_TODO",
+    id
+  };
+};
 
 export const VisibilityFilters = {
   SHOW_ALL: "SHOW_ALL",

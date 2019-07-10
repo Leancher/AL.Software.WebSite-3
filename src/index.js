@@ -16,6 +16,14 @@ const initialState = {
     "Вещи времен 90-х",
     "История Череповца",
     "Заметки"
+  ],
+  visibilityFilter: "SHOW_ALL",
+  todos: [
+    {
+      completed: false,
+      id: 0,
+      text: "First todo"
+    }
   ]
 };
 

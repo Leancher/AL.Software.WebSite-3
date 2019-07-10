@@ -1,10 +1,19 @@
 import React from "react";
+import Footer from "./Footer";
+import AddTodo from "../containers/AddTodo";
+import VisibleTodoList from "../containers/VisibleTodoList";
+
 import Header from "./Header";
 import NavigationMenu from "./NavigationMenu";
 import CategoryCaption from "./CategoryCaption";
 
 const App = () => (
   <React.Fragment>
+    <div>
+      <AddTodo />
+      <VisibleTodoList />
+      <Footer />
+    </div>
     <Header />
     <div className="row">
       <div className="col-xl-12 col-lg-3 col-md-3 col-sm-3 col-3 mt-xl-0 mt-lg-3 mt-md-3 mt-sm-3 mt-3 MenuList hideMainMenu">
