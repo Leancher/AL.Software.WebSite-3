@@ -17,6 +17,7 @@ const initialState = {
     "История Череповца",
     "Заметки"
   ],
+  currentCategory: 1,
   visibilityFilter: "SHOW_ALL",
   todos: [
     {

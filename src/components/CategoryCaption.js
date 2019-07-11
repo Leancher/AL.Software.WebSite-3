@@ -1,62 +1,36 @@
 import React from "react";
-import { config, buildLink, getCategoriesList } from "./utilites";
-const { caption } = config;
+import { connect } from "react-redux";
+import DropdownMenu from "./DropdownMenu";
 
-class CategoryCaption extends React.Component {
-  state = {
-    isLoading: false,
-    categoriesList: []
-  };
-
-  renderDropdownMenu() {
-    return this.state.categoriesList.map((element, index) => {
-      if (index === 8) return "";
-      return (
-        <a href={buildLink(index, 0)} key={index}>
-          {element[caption]}
-        </a>
-      );
-    });
-  }
-
-  renderCatCaption() {
-    return (
-      <React.Fragment>
-        <div className="row">
-          <div className="col-2">
-            <button
-              className="btn hideDropMenu btnMenu"
-              type="button"
-              data-toggle="dropdown"
-            >
-              <img src="./Pictures/Util/menu.png" alt="menu" />
-            </button>
-            <div className="dropdown-menu">
-              <div className="MenuList">{this.renderDropdownMenu()}</div>
-            </div>
+const CategoryCaption = ({ categories, curCategory }) => {
+  //console.log("CategoryCaption " + categories[curCategory]);
+  return (
+    <div className="row">
+      <div className="col-2">
+        <button
+          className="btn hideDropMenu btnMenu"
+          type="button"
+          data-toggle="dropdown"
+        >
+          <img src="./Pictures/Util/menu.png" alt="menu" />
+        </button>
+        <div className="dropdown-menu">
+          <div className="MenuList">
+            <DropdownMenu />
           </div>
-          <div className="col-10">{this.props.catCaption}</div>
         </div>
-      </React.Fragment>
-    );
-  }
+      </div>
+      <div className="col-10">{categories[curCategory]}</div>
+    </div>
+  );
+};
 
-  loadData = responseList => {
-    this.setState({
-      isLoading: true,
-      categoriesList: responseList
-    });
+const mapStateToProps = state => {
+  //console.log("mapStateToProps " + state.categories);
+  return {
+    categories: [...state.categories],
+    curCategory: state.currentCategory
   };
+};
 
-  render() {
-    return (
-      <React.Fragment>
-        {this.state.isLoading === false
-          ? getCategoriesList(this.loadData, this.catNum)
-          : this.renderCatCaption()}
-      </React.Fragment>
-    );
-  }
-}
-
-export default CategoryCaption;
+export default connect(mapStateToProps)(CategoryCaption);

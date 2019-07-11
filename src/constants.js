@@ -1,5 +1,5 @@
 const constants = {
-  GET_NAME_CATEGORY: "GET_NAME_CATEGORY"
+  SET_NUMBER_CATEGORY: "SET_NUMBER_CATEGORY"
 };
 
 export default constants;
