@@ -1,38 +1,17 @@
-import "./index.css";
-import React from "react";
-import { render } from "react-dom";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
-import App from "./components/App";
-import rootReducer from "./reducers";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { store } from './store/configureStore'
+import App from './containers/App' // изменили путь
 
-const initialState = {
-  categories: [
-    "Главная",
-    "Мои проекты",
-    "Ремонт автомобилей",
-    "Мои фотографии",
-    "Вещи времен СССР",
-    "Вещи времен 90-х",
-    "История Череповца",
-    "Заметки"
-  ],
-  currentCategory: 1,
-  visibilityFilter: "SHOW_ALL",
-  todos: [
-    {
-      completed: false,
-      id: 0,
-      text: "First todo"
-    }
-  ]
-};
+import registerServiceWorker from './registerServiceWorker'
 
-const store = createStore(rootReducer, initialState);
+import './index.css'
 
-render(
+ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById("root")
-);
+  document.getElementById('root')
+)
+registerServiceWorker()

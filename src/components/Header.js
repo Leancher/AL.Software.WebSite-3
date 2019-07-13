@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import { buildLink } from "./utilites";
 
 const Header = props => {
@@ -21,11 +20,4 @@ const Header = props => {
   );
 };
 
-const mapStateToProps = state => {
-  //console.log("mapStateToProps " + state.categories);
-  return {
-    categories: [...state.categories]
-  };
-};
-
-export default connect(mapStateToProps)(Header);
+export default Header;

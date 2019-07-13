@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import todos from "./todos";
-import visibilityFilter from "./visibilityFilter";
-import categoryReducer from "./setCategory";
+import { pageReducer } from "./page";
+import { userReducer } from "./user";
+import { categories } from "./categories";
+import curCategory from "./curCategory";
 
-export default combineReducers({
-  todos,
-  visibilityFilter,
-  categoryReducer
+export const rootReducer = combineReducers({
+  page: pageReducer,
+  user: userReducer,
+  categories: categories,
+  curCategory: curCategory
 });

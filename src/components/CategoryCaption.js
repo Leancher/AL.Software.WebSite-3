@@ -1,9 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
 import DropdownMenu from "./DropdownMenu";
 
 const CategoryCaption = ({ categories, curCategory }) => {
-  //console.log("CategoryCaption " + categories[curCategory]);
   return (
     <div className="row">
       <div className="col-2">
@@ -16,7 +14,7 @@ const CategoryCaption = ({ categories, curCategory }) => {
         </button>
         <div className="dropdown-menu">
           <div className="MenuList">
-            <DropdownMenu />
+            <DropdownMenu categories={categories} />
           </div>
         </div>
       </div>
@@ -25,12 +23,4 @@ const CategoryCaption = ({ categories, curCategory }) => {
   );
 };
 
-const mapStateToProps = state => {
-  //console.log("mapStateToProps " + state.categories);
-  return {
-    categories: [...state.categories],
-    curCategory: state.currentCategory
-  };
-};
-
-export default connect(mapStateToProps)(CategoryCaption);
+export default CategoryCaption;

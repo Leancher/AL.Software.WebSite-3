@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import { buildLink } from "./utilites";
 
 const DropdownMenu = ({ categories }) => {
@@ -13,11 +12,4 @@ const DropdownMenu = ({ categories }) => {
   });
 };
 
-const mapStateToProps = state => {
-  //console.log("mapStateToProps " + state.categories);
-  return {
-    categories: [...state.categories]
-  };
-};
-
-export default connect(mapStateToProps)(DropdownMenu);
+export default DropdownMenu;
