@@ -5,12 +5,14 @@ import { Page } from "../components/Page";
 import MainPage from "../components/MainPage";
 
 import { setCurrentCategory } from "../actions";
+import { getCategoriesList } from "../actions";
 import { getPhotos } from "../actions/PageActions";
 
 class App extends Component {
   render() {
     const { user, page, getPhotosAction } = this.props;
-    const { categories, curCategory, setCurCategory } = this.props;
+    const { categories, curCategory, setCurCategory, getCatList } = this.props;
+    getCatList();
     return (
       <React.Fragment>
         <div className="App">
@@ -44,6 +46,7 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   getPhotosAction: year => dispatch(getPhotos(year)),
+  getCatList: () => dispatch(getCategoriesList()),
   setCurCategory: number => dispatch(setCurrentCategory(number))
 });
 

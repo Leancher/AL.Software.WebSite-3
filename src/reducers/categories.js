@@ -1,3 +1,9 @@
+import {
+  GET_CAT_LIST_REQUEST,
+  GET_CAT_LIST_SUCCESS,
+  GET_CAT_LIST_FAIL
+} from "../actions/index";
+
 const initialState = [
   "Главная",
   "Мои проекты",
@@ -8,4 +14,21 @@ const initialState = [
   "История Череповца",
   "Заметки"
 ];
-export const categories = (state = initialState) => state;
+
+const parseCompositeString = string =>
+  string.split("&").map(item => item.split(";"));
+
+export const categories = (state = [], action) => {
+  switch (action.type) {
+    case GET_CAT_LIST_REQUEST:
+      return { ...state, isFetching: true, error: "" };
+    case GET_CAT_LIST_SUCCESS:
+      console.log("GET_CAT_LIST_SUCCESS ");
+      console.log(parseCompositeString(action.payload));
+      return parseCompositeString(action.payload);
+    case GET_CAT_LIST_FAIL:
+      return { ...state, isFetching: false, error: action.payload.message };
+    default:
+      return state;
+  }
+};
