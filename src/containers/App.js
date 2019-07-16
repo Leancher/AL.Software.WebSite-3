@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     const { user, page, getPhotosAction } = this.props;
     const { categories, curCategory, setCurCategory, getCatList } = this.props;
-    getCatList();
+    //getCatList();
     return (
       <React.Fragment>
         <div className="App">
@@ -28,7 +28,7 @@ class App extends Component {
           />
         </div>
         <MainPage
-          categories={categories}
+          categories={categories.items}
           curCategory={curCategory}
           setCurCategory={setCurCategory}
         />

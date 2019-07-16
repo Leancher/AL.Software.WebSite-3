@@ -4,30 +4,53 @@ import {
   GET_CAT_LIST_FAIL
 } from "../actions/index";
 
-const initialState = [
-  "Главная",
-  "Мои проекты",
-  "Ремонт автомобилей",
-  "Мои фотографии",
-  "Вещи времен СССР",
-  "Вещи времен 90-х",
-  "История Череповца",
-  "Заметки"
-];
+const initialState = {
+  items: [
+    [
+      "Main",
+      "0",
+      "0",
+      "Главная",
+      "Главная страница сайта",
+      "4173",
+      "0",
+      "",
+      "0"
+    ],
+    [
+      "MyProjects",
+      "1",
+      "0",
+      "Мои проекты",
+      "Мое хобби - программирование и электроника",
+      "95",
+      "0",
+      "0",
+      "1"
+    ],
+    "Ремонт автомобилей",
+    "Мои фотографии",
+    "Вещи времен СССР",
+    "Вещи времен 90-х",
+    "История Череповца",
+    "Заметки"
+  ],
+  isFetching: false
+};
 
 const parseCompositeString = string =>
   string.split("&").map(item => item.split(";"));
 
-export const categories = (state = [], action) => {
+export const categories = (state = initialState, action) => {
   switch (action.type) {
     case GET_CAT_LIST_REQUEST:
-      return { ...state, isFetching: true, error: "" };
+      return state;
     case GET_CAT_LIST_SUCCESS:
       console.log("GET_CAT_LIST_SUCCESS ");
       console.log(parseCompositeString(action.payload));
       return parseCompositeString(action.payload);
     case GET_CAT_LIST_FAIL:
-      return { ...state, isFetching: false, error: action.payload.message };
+      return state;
     default:
       return state;
   }

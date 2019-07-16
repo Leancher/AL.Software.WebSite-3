@@ -1,4 +1,5 @@
 import React from "react";
+import { catPropsName } from "../containers/catPropsName";
 
 class NavigationMenu extends React.Component {
   onClickButton = e => {
@@ -7,6 +8,9 @@ class NavigationMenu extends React.Component {
   };
   render() {
     const { categories } = this.props;
+    const { caption } = catPropsName;
+    console.log("NavigationMenu");
+    console.log(categories);
     return categories.map((element, index) => {
       if (index === 8) return "";
       return (
@@ -16,7 +20,7 @@ class NavigationMenu extends React.Component {
           key={index}
           onClick={this.onClickButton}
         >
-          {element}
+          {element[caption]}
         </button>
       );
     });
