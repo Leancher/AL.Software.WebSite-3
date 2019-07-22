@@ -48,7 +48,7 @@ export const categories = (state = initialState, action) => {
     case GET_CAT_LIST_SUCCESS:
       console.log("GET_CAT_LIST_SUCCESS ");
       console.log(parseCompositeString(action.payload));
-      return parseCompositeString(action.payload);
+      return { items: parseCompositeString(action.payload), isFetching: true };
     case GET_CAT_LIST_FAIL:
       return state;
     default:

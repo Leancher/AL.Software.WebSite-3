@@ -9,10 +9,12 @@ import { getCategoriesList } from "../actions";
 import { getPhotos } from "../actions/PageActions";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getCatList();
+  }
   render() {
     const { user, page, getPhotosAction } = this.props;
-    const { categories, curCategory, setCurCategory, getCatList } = this.props;
-    //getCatList();
+    const { categories, curCategory, setCurCategory } = this.props;
     return (
       <React.Fragment>
         <div className="App">
