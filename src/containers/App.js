@@ -39,12 +39,17 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = store => ({
-  user: store.user,
-  page: store.page,
-  categories: store.categories,
-  curCategory: store.curCategory
-});
+const mapStateToProps = (state, ownProps) => {
+  const curCategory = ownProps.match.params.curCategory;
+  console.log("mapStateToProps ownProps");
+  console.log(ownProps);
+  return {
+    user: state.user,
+    page: state.page,
+    categories: state.categories,
+    curCategory: curCategory
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   getPhotosAction: year => dispatch(getPhotos(year)),

@@ -1,5 +1,6 @@
 import React from "react";
 import { catPropsName } from "../containers/catPropsName";
+import { NavLink } from "react-router-dom";
 
 class NavigationMenu extends React.Component {
   onClickButton = e => {
@@ -9,19 +10,18 @@ class NavigationMenu extends React.Component {
   render() {
     const { categories } = this.props;
     const { caption } = catPropsName;
-    console.log("NavigationMenu");
-    console.log(categories);
     return categories.map((element, index) => {
       if (index === 8) return "";
       return (
-        <button
+        <NavLink
           id={index}
           className="col-xl"
           key={index}
           onClick={this.onClickButton}
+          to={"/" + index}
         >
           {element[caption]}
-        </button>
+        </NavLink>
       );
     });
   }

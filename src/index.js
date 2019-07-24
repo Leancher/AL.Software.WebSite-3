@@ -1,17 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { store } from './store/configureStore'
-import App from './containers/App' // изменили путь
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { store } from "./store/configureStore";
+import App from "./containers/App";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import registerServiceWorker from "./registerServiceWorker";
 
-import registerServiceWorker from './registerServiceWorker'
+import "./index.css";
 
-import './index.css'
-
-ReactDOM.render(
+const Root = ({ store }) => (
   <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-)
-registerServiceWorker()
+    <Router>
+      <Route path="/:curCategory?" component={App} />
+    </Router>
+  </Provider>
+);
+
+ReactDOM.render(<Root store={store} />, document.getElementById("root"));
+
+registerServiceWorker();
