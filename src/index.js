@@ -9,9 +9,12 @@ import registerServiceWorker from "./registerServiceWorker";
 import "./index.css";
 
 const Root = ({ store }) => (
+  // Служит для получения необходимых данных из store нашего приложения
   <Provider store={store}>
     <Router>
-      <Route path="/:curCategory?" component={App} />
+      {/*  : - ознчает параметр, ? - параметр необязателен
+      Для получения параметров в компоненте, надо обратиться к объекту this.props.match.params */}
+      <Route exact path="/:curCategory?" component={App} />
     </Router>
   </Provider>
 );

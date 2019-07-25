@@ -11,6 +11,10 @@ export const setCurrentCategory = number => ({
   payload: number
 });
 
+// Асинхронное действие. Вызывается в несколько этапов. Сначала
+// происходит действие GET_CAT_LIST_REQUEST и происходит запрос HTTP.
+// Затем по результатам запроса через промис происходит соответсвующее
+// действие.
 export const getCategoriesList = () => {
   return dispatch => {
     dispatch({
@@ -25,7 +29,7 @@ export const getCategoriesList = () => {
         return;
       })
       .catch(error => {
-        alert(error); // Error: Not Found
+        console.log(error); // Error: Not Found
       });
   };
 };

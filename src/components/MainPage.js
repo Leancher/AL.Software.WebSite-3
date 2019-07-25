@@ -6,7 +6,7 @@ import CategoryCaption from "./CategoryCaption";
 
 class MainPage extends React.Component {
   render() {
-    const { categories, setCurCategory, curCategory } = this.props;
+    const { categories, setCurCategory, curCategory = 0 } = this.props;
     return (
       <React.Fragment>
         <Header />
