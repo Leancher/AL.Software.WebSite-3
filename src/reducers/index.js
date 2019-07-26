@@ -1,6 +1,4 @@
 import { combineReducers } from "redux";
-import { pageReducer } from "./page";
-import { userReducer } from "./user";
 import { categories } from "./categories";
 import curCategory from "./curCategory";
 
@@ -10,8 +8,6 @@ import curCategory from "./curCategory";
 // Если тип совпадает, то возврщается новое значени, если
 // нет, то первоначальное или неопределенное.
 export const rootReducer = combineReducers({
-  page: pageReducer,
-  user: userReducer,
   categories: categories,
   curCategory: curCategory
 });

@@ -6,7 +6,7 @@ import CategoryCaption from "./CategoryCaption";
 
 class MainPage extends React.Component {
   render() {
-    const { categories, setCurCategory, curCategory = 0 } = this.props;
+    const { categories, setCurCategory, category } = this.props;
     return (
       <React.Fragment>
         <Header />
@@ -22,10 +22,7 @@ class MainPage extends React.Component {
           <div className="col-xl-12 col-lg-9 col-md-9 col-sm-9 ContentBlock">
             <div className="row ">
               <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ContentCaption">
-                <CategoryCaption
-                  categories={categories}
-                  curCategory={curCategory}
-                />
+                <CategoryCaption categories={categories} category={category} />
               </div>
               <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 no-gutters">
                 Redux is a predictable state container for JavaScript apps. It

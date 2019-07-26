@@ -2,7 +2,7 @@ import React from "react";
 import DropdownMenu from "./DropdownMenu";
 import { catPropsName } from "../containers/catPropsName";
 
-const CategoryCaption = ({ categories, curCategory }) => {
+const CategoryCaption = ({ categories, category }) => {
   const { caption } = catPropsName;
   return (
     <div className="row">
@@ -20,7 +20,7 @@ const CategoryCaption = ({ categories, curCategory }) => {
           </div>
         </div>
       </div>
-      <div className="col-10">{categories[curCategory][caption]}</div>
+      <div className="col-10">{categories[category][caption]}</div>
     </div>
   );
 };

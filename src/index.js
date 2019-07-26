@@ -14,7 +14,7 @@ const Root = ({ store }) => (
     <Router>
       {/*  : - ознчает параметр, ? - параметр необязателен
       Для получения параметров в компоненте, надо обратиться к объекту this.props.match.params */}
-      <Route exact path="/:curCategory?" component={App} />
+      <Route exact path="/:cat?/:subCat?" component={App} />
     </Router>
   </Provider>
 );
