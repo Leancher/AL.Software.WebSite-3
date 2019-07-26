@@ -1,14 +1,14 @@
 import { serverRequest } from "../containers/requestHandler";
 
-export const SET_NUMBER_CATEGORY = "SET_NUMBER_CATEGORY";
+export const SET_CATEGORY_NUMBER = "SET_NUMBER_CATEGORY";
 
 export const GET_CAT_LIST_REQUEST = "GET_CAT_LIST_REQUEST";
 export const GET_CAT_LIST_SUCCESS = "GET_CAT_LIST_SUCCESS";
 export const GET_CAT_LIST_FAIL = "GET_CAT_LIST_FAIL";
 
-export const setCurrentCategory = number => ({
-  type: SET_NUMBER_CATEGORY,
-  payload: number
+export const setCatNum = catNum => ({
+  type: SET_CATEGORY_NUMBER,
+  payload: catNum
 });
 
 // Асинхронное действие. Вызывается в несколько этапов. Сначала

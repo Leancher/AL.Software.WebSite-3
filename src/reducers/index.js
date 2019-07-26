@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { categories } from "./categories";
-import curCategory from "./curCategory";
+import catNum from "./categoryNumber";
 
 // Объединяем все редьсеры в один
 // При обновлении состояния вызываются все функции-редьюсеры
@@ -9,5 +9,5 @@ import curCategory from "./curCategory";
 // нет, то первоначальное или неопределенное.
 export const rootReducer = combineReducers({
   categories: categories,
-  curCategory: curCategory
+  catNum: catNum
 });

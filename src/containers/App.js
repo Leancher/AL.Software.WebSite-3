@@ -1,39 +1,47 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import MainPage from "../components/MainPage";
+import { withRouter } from "react-router";
+import Header from "../components/Header";
+import Body from "../components/Body";
 
-import { setCurrentCategory } from "../actions";
+import { setCatNum } from "../actions";
 import { getCategoriesList } from "../actions";
 
 class App extends Component {
   componentDidMount() {
+    const { urlCatNum, setCatNum, getCatList } = this.props;
     // Редьюсер асинхронный, вызываем его в этом месте.
-    this.props.getCatList();
+    getCatList();
+    if (urlCatNum) setCatNum(urlCatNum);
   }
   render() {
-    const { categories, category = 0, setCurCategory } = this.props;
+    const { categories, catNum, setCatNum } = this.props;
+    console.log("App");
+    console.log(this.props);
     return (
       <React.Fragment>
-        <MainPage
+        <Header />
+        <Body
           categories={categories.items}
-          category={category}
-          setCurCategory={setCurCategory}
+          catNum={catNum}
+          setCatNum={setCatNum}
         />
       </React.Fragment>
     );
   }
 }
 
-// В mapStateToProps указываем только те значения из store, которые для этого компоненты (в этом случае App).
+// В mapStateToProps указываем только те значения из store, которые нужны для этого компоненты (в этом случае App).
 // Перерисовка компонента проихсодит только при обновлении этих данных.
 // Вторым аргументом получаем собственные свойства. В этом случае были переданы параметры URL.
 const mapStateToProps = (state, ownProps) => {
-  const cat = ownProps.match.params.cat;
-  const subCat = ownProps.match.params.subCat;
+  const catNum = ownProps.match.params.catNum;
+  const subCatNum = ownProps.match.params.subCatNum;
   return {
     categories: state.categories,
-    category: cat,
-    subCategory: subCat
+    catNum: state.catNum,
+    urlCatNum: catNum
+    //subCatNum: subCatNum
   };
 };
 
@@ -41,11 +49,13 @@ const mapStateToProps = (state, ownProps) => {
 // компонентые. Затем в props комопненты можно вызвать соответствующие редьюсерам функции
 const mapDispatchToProps = dispatch => ({
   getCatList: () => dispatch(getCategoriesList()),
-  setCurCategory: number => dispatch(setCurrentCategory(number))
+  setCatNum: catNum => dispatch(setCatNum(catNum))
 });
 
 // Получаем данные из store. В нужном комопненте эти данные можно получить из props
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);

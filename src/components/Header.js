@@ -1,8 +1,17 @@
 import React from "react";
+import { connect } from "react-redux";
+
+import { catPropsName } from "../containers/catPropsName";
 import { buildLink } from "./utilites";
 
 const Header = props => {
-  let logoName = props.catName;
+  const { name } = catPropsName;
+  const {
+    categories: { items },
+    catNum
+  } = props;
+  let logoName = "Main";
+  logoName = items[catNum][name];
   if (!logoName) logoName = "Main";
   return (
     <div className="row justify-content-between header">
@@ -20,4 +29,11 @@ const Header = props => {
   );
 };
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    categories: state.categories,
+    catNum: state.catNum
+  };
+};
+
+export default connect(mapStateToProps)(Header);
