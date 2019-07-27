@@ -9,23 +9,15 @@ import { getCategoriesList } from "../actions";
 
 class App extends Component {
   componentDidMount() {
-    const { urlCatNum, setCatNum, getCatList } = this.props;
     // Редьюсер асинхронный, вызываем его в этом месте.
-    getCatList();
-    if (urlCatNum) setCatNum(urlCatNum);
+    this.props.getCatList();
   }
   render() {
-    const { categories, catNum, setCatNum } = this.props;
-    console.log("App");
-    console.log(this.props);
+    const { categories, catNum } = this.props;
     return (
       <React.Fragment>
-        <Header />
-        <Body
-          categories={categories.items}
-          catNum={catNum}
-          setCatNum={setCatNum}
-        />
+        <Header curCat={categories.items[catNum]} />
+        <Body categories={categories.items} catNum={catNum} />
       </React.Fragment>
     );
   }
@@ -35,13 +27,11 @@ class App extends Component {
 // Перерисовка компонента проихсодит только при обновлении этих данных.
 // Вторым аргументом получаем собственные свойства. В этом случае были переданы параметры URL.
 const mapStateToProps = (state, ownProps) => {
-  const catNum = ownProps.match.params.catNum;
-  const subCatNum = ownProps.match.params.subCatNum;
+  const { catNum, subCatNum } = ownProps.match.params;
   return {
     categories: state.categories,
-    catNum: state.catNum,
-    urlCatNum: catNum
-    //subCatNum: subCatNum
+    catNum: catNum,
+    subCatNum: !subCatNum ? 0 : subCatNum
   };
 };
 

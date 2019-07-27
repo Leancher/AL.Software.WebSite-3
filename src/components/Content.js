@@ -1,12 +1,25 @@
 import React from "react";
 import CategoryCaption from "./CategoryCaption";
+import { catPropsName } from "../containers/catPropsName";
+
+const {
+  name,
+  caption,
+  description,
+  isPhotoAlbum,
+  isTileGrid,
+  isArticle
+} = catPropsName;
 
 class Content extends React.Component {
   render() {
-    const { categories, catNum } = this.props;
+    const { curCat } = this.props;
+    console.log("Content page");
+    console.log(curCat);
+
     return (
       <div className="col-xl-12 col-lg-9 col-md-9 col-sm-9 ContentBlock">
-        <CategoryCaption categories={categories} catNum={catNum} />
+        <CategoryCaption curCat={curCat} />
         <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 no-gutters">
           Redux is a predictable state container for JavaScript apps. It helps
           you write applications that behave consistently, run in different

@@ -1,13 +1,13 @@
 import React from "react";
-import DropdownMenu from "./DropdownMenu";
+// import DropdownMenu from "./DropdownMenu";
 import { catPropsName } from "../containers/catPropsName";
 
-const CategoryCaption = ({ categories, catNum }) => {
+const CategoryCaption = ({ curCat }) => {
   const { caption } = catPropsName;
   //console.log("CategoryCaption");
   //console.log(categories);
   return (
-    // Эдемент будет занимать весь ряд
+    // Эдемент CategoryCaption будет занимать весь ряд
     <div className="row ">
       {/* Количество колонок, занимаемых элементом в ряду */}
       <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ContentCaption">
@@ -24,12 +24,12 @@ const CategoryCaption = ({ categories, catNum }) => {
             </button>
             <div className="dropdown-menu">
               <div className="MenuList">
-                <DropdownMenu categories={categories} />
+                {/* <DropdownMenu categories={categories} /> */}
               </div>
             </div>
           </div>
           {/* Элемент caption занимает 10 колонок */}
-          <div className="col-10">{categories[catNum][caption]}</div>
+          <div className="col-10">{curCat[caption]}</div>
         </div>
       </div>
     </div>
