@@ -30,7 +30,9 @@ const mapStateToProps = (state, ownProps) => {
   const { catNum, subCatNum } = ownProps.match.params;
   return {
     categories: state.categories,
-    catNum: catNum,
+    // При первой загрузке страницы, когда данные с сервера не пришли
+    // catNum будет undefined, Redirect в index.js не сработает
+    catNum: !catNum ? 0 : catNum,
     subCatNum: !subCatNum ? 0 : subCatNum
   };
 };

@@ -1,6 +1,7 @@
 const SERVER_URL = "http://192.168.0.100:8090/Server.aspx";
 
-function httpGet(url) {
+export const getServerResponse = requestString => {
+  const url = SERVER_URL + "?" + requestString;
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
@@ -8,9 +9,9 @@ function httpGet(url) {
     xhr.onerror = () => reject(xhr.statusText);
     xhr.send();
   });
-}
+};
 
-export const serverRequest = (
+/* export const getServerResponse = (
   command,
   cat = "",
   subCat = "",
@@ -18,8 +19,7 @@ export const serverRequest = (
   note = ""
 ) => {
   return httpGet(
-    SERVER_URL +
-      "?Command=" +
+    "Command=" +
       command +
       "&cat=" +
       cat +
@@ -30,4 +30,4 @@ export const serverRequest = (
       "&note=" +
       note
   );
-};
+}; */

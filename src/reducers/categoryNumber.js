@@ -4,7 +4,7 @@ import { SET_CATEGORY_NUMBER } from "../actions/index";
 const initialState = 1;
 
 // Одна из вывзываемых функция-редьюсер, которая
-// при совпадении типа возващет новое значение
+// при совпадении типа возвращает новое значение
 const catNum = (state = initialState, action) => {
   switch (action.type) {
     case SET_CATEGORY_NUMBER:
