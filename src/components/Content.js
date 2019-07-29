@@ -1,22 +1,19 @@
 import React from "react";
 import CategoryCaption from "./CategoryCaption";
-import { catPropsName } from "../containers/catPropsName";
+//import { catPropsName } from "../containers/catPropsName";
 
-const {
+/* const {
   name,
   caption,
   description,
   isPhotoAlbum,
   isTileGrid,
   isArticle
-} = catPropsName;
+} = catPropsName; */
 
 class Content extends React.Component {
   render() {
     const { curCat } = this.props;
-    console.log("Content page");
-    console.log(curCat);
-
     return (
       <div className="col-xl-12 col-lg-9 col-md-9 col-sm-9 ContentBlock">
         <CategoryCaption curCat={curCat} />

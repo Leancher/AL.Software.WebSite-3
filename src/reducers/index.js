@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
-import { categories } from "./categories";
+import { requestHandler } from "./requestHandler";
+import response from "./serverResponse";
 import catNum from "./categoryNumber";
 
 // Объединяем все редьсеры в один
@@ -8,6 +9,7 @@ import catNum from "./categoryNumber";
 // Если тип совпадает, то возврщается новое значени, если
 // нет, то первоначальное или неопределенное.
 export const rootReducer = combineReducers({
-  categories: categories,
+  requestHandler,
+  response,
   catNum: catNum
 });

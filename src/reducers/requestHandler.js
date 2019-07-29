@@ -1,4 +1,4 @@
-import { SERVER_REQUEST } from "../actions/index";
+import { REQUEST_SEND, REQUEST_SUCCESS, REQUEST_FAIL } from "../actions/index";
 
 const initialState = {
   items: [
@@ -12,16 +12,22 @@ const initialState = {
     "",
     "0"
   ],
-  isFetching: false
+  isFetching: true
 };
 
-const catNum = (state = initialState, action) => {
+export const requestHandler = (state = initialState, action) => {
   switch (action.type) {
-    case SERVER_REQUEST:
-      return action.payload;
-    default:
+    case REQUEST_SEND:
+      return Object.assign({}, state);
+    case REQUEST_SUCCESS:
+      return Object.assign({}, state, {
+        items: action.payload,
+        isFetching: false
+      });
+    case REQUEST_FAIL:
       return state;
+    default:
+      console.log("requestHandler default");
+      return Object.assign({}, state);
   }
 };
-
-export default catNum;
