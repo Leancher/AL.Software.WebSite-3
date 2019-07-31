@@ -32,7 +32,7 @@ const mapStateToProps = (state, ownProps) => {
   console.log("App  mapStateToProps");
   console.log(state);
   return {
-    categories: state.response,
+    categories: state.response.categories,
     // При первой загрузке страницы, когда данные с сервера не пришли
     // catNum будет undefined, Redirect в index.js не сработает
     catNum: !catNum ? 0 : catNum,

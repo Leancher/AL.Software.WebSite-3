@@ -12,22 +12,48 @@ const initialState = {
     "",
     "0"
   ],
-  isFetching: true
+  isFetching: false,
+  error: null
 };
 
 export const requestHandler = (state = initialState, action) => {
   switch (action.type) {
+    // Редьюсер для действия, сообщающего об отправке запроса
     case REQUEST_SEND:
-      return Object.assign({}, state);
+      // Требуется новый объект, текущий не меняем
+      return Object.assign({}, state, {
+        categories: {
+          // Отправка в процессе
+          isFetching: true,
+          error: null
+        }
+      });
+    // Оедьюсер по-умолчаниюю для удачных ответов.
+    // Конкретные описаны в serverResponse.
     case REQUEST_SUCCESS:
       return Object.assign({}, state, {
-        items: action.payload,
-        isFetching: false
+        categories: {
+          items: action.payload,
+          // Отправка закончена.
+          isFetching: false,
+          // Ошибок нет
+          error: null
+        }
       });
+    // Редьюсер для неудачных ответов, записываем сообщение об ошибке.
     case REQUEST_FAIL:
-      return state;
+      return Object.assign({}, state, {
+        categories: {
+          isFetching: false,
+          error: action.payload
+        }
+      });
     default:
-      console.log("requestHandler default");
-      return Object.assign({}, state);
+      return Object.assign({}, state, {
+        categories: {
+          isFetching: false,
+          error: null
+        }
+      });
   }
 };

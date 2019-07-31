@@ -2,6 +2,7 @@ import { getServerResponse } from "../containers/getServerResponse";
 
 export const SET_CATEGORY_NUMBER = "SET_NUMBER_CATEGORY";
 export const SERVER_REQUEST_CATEGORIES = "SERVER_REQUEST_CATEGORIES";
+export const SERVER_REQUEST_CUR_CAT = "SERVER_REQUEST_CUR_CAT";
 
 export const REQUEST_SEND = "REQUEST_SEND";
 export const REQUEST_SUCCESS = "REQUEST_SUCCESS";
@@ -17,21 +18,31 @@ export const setCatNum = catNum => ({
 });
 
 export const getCategoriesList = () => {
+  // Формируем строку запроса
   const reqStr = buildReqStr("getCategoriesList");
+  // Вызываем обработчик запросов, аргументы: строка запроса
+  // и действие при удачном ответе сервера
   return requestHandler(reqStr, SERVER_REQUEST_CATEGORIES);
 };
 
-// Асинхронное действие. Вызывается в несколько этапов. Сначала
-// происходит действие GET_CAT_LIST_REQUEST и происходит запрос HTTP.
+export const getCurrentCategory = catNum => {
+  const reqStr = buildReqStr("getCurrentCategory");
+  return requestHandler(reqStr, SERVER_REQUEST_CUR_CAT);
+};
+
+// Асинхронное действие. Вызывается в несколько этапов. Вызываем
+// действие REQUEST_SEND, делаем запрос HTTP.
 // Затем по результатам запроса через промис происходит соответствующее
 // действие.
 const requestHandler = (requestString, type) => {
   return dispatch => {
+    // Вызываем действие и делаем запрос на сервер
     dispatch({
       type: REQUEST_SEND
     });
     return getServerResponse(requestString)
       .then(response => {
+        // При удачном ответе, вызываем действие в соответствии с запросом
         dispatch({
           type: type,
           payload: response
@@ -39,38 +50,12 @@ const requestHandler = (requestString, type) => {
         return;
       })
       .catch(error => {
-        console.log(error); // Error: Not Found
-      });
-  };
-};
-
-/* export const getCategoriesList = () => {
-  const reqStr = buildReqStr("getCategoriesList");
-  return dispatch =>
-    dispatch(requestHandler(reqStr, SERVER_REQUEST_CATEGORIES));
-};
-
-// Асинхронное действие. Вызывается в несколько этапов. Сначала
-// происходит действие GET_CAT_LIST_REQUEST и происходит запрос HTTP.
-// Затем по результатам запроса через промис происходит соответствующее
-// действие.
-const requestHandler = (requestString, type) => {
-  console.log("requestHandler");
-  console.log(requestString);
-  return dispatch => {
-    dispatch({
-      type: REQUEST_SEND
-    });
-    return getServerResponse(requestString)
-      .then(response => {
+        console.log(error);
+        // При неудачно - вызываем действие для ошибки
         dispatch({
-          type: type,
-          payload: response
+          type: REQUEST_FAIL,
+          payload: error
         });
-        return;
-      })
-      .catch(error => {
-        console.log(error); // Error: Not Found
       });
   };
-}; */
+};

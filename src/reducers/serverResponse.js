@@ -1,18 +1,21 @@
 import { SERVER_REQUEST_CATEGORIES } from "../actions/index";
 
 const initialState = {
-  items: [
-    "Main",
-    "0",
-    "0",
-    "Главная",
-    "Главная страница сайта",
-    "4173",
-    "0",
-    "",
-    "0"
-  ],
-  isFetching: false
+  categories: {
+    items: [
+      "Main",
+      "0",
+      "0",
+      "Главная",
+      "Главная страница сайта",
+      "4173",
+      "0",
+      "",
+      "0"
+    ],
+    isFetching: false,
+    error: null
+  }
 };
 
 const parseCompositeString = string =>
@@ -20,13 +23,16 @@ const parseCompositeString = string =>
 
 const response = (state = initialState, action) => {
   switch (action.type) {
+    // Редьюсер для ответ на конкретные запросы
     case SERVER_REQUEST_CATEGORIES:
       return Object.assign({}, state, {
-        items: parseCompositeString(action.payload),
-        isFetching: true
+        categories: {
+          items: parseCompositeString(action.payload),
+          isFetching: false,
+          error: null
+        }
       });
     default:
-      console.log("response default");
       return Object.assign({}, state);
   }
 };
