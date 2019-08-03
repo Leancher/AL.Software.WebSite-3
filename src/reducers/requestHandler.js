@@ -12,7 +12,7 @@ const initialState = {
     "",
     "0"
   ],
-  isFetching: false,
+  isFetched: false,
   error: null
 };
 
@@ -24,7 +24,7 @@ export const requestHandler = (state = initialState, action) => {
       return Object.assign({}, state, {
         categories: {
           // Отправка в процессе
-          isFetching: true,
+          isFetched: false,
           error: null
         }
       });
@@ -35,7 +35,7 @@ export const requestHandler = (state = initialState, action) => {
         categories: {
           items: action.payload,
           // Отправка закончена.
-          isFetching: false,
+          isFetching: true,
           // Ошибок нет
           error: null
         }
@@ -44,14 +44,14 @@ export const requestHandler = (state = initialState, action) => {
     case REQUEST_FAIL:
       return Object.assign({}, state, {
         categories: {
-          isFetching: false,
+          isFetched: false,
           error: action.payload
         }
       });
     default:
       return Object.assign({}, state, {
         categories: {
-          isFetching: false,
+          isFetched: false,
           error: null
         }
       });

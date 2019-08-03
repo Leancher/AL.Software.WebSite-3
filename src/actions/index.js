@@ -26,7 +26,7 @@ export const getCategoriesList = () => {
 };
 
 export const getCurrentCategory = catNum => {
-  const reqStr = buildReqStr("getCurrentCategory");
+  const reqStr = buildReqStr("getCurrentCategory", catNum);
   return requestHandler(reqStr, SERVER_REQUEST_CUR_CAT);
 };
 

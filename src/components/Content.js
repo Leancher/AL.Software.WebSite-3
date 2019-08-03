@@ -1,5 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 import CategoryCaption from "./CategoryCaption";
+import { getCurrentCategory } from "../actions";
 //import { catPropsName } from "../containers/catPropsName";
 
 /* const {
@@ -12,6 +15,13 @@ import CategoryCaption from "./CategoryCaption";
 } = catPropsName; */
 
 class Content extends React.Component {
+  shouldComponentUpdate() {
+    const catNum = this.props.match.params.catNum;
+    if (!this.props.currentCategory.isFetched) this.props.getCatNum(catNum);
+    console.log("Content props");
+    console.log(this.props);
+    return true;
+  }
   render() {
     const { curCat } = this.props;
     return (
@@ -32,4 +42,27 @@ class Content extends React.Component {
   }
 }
 
-export default Content;
+const mapStateToProps = (state, ownProps) => {
+  //const { catNum, subCatNum } = ownProps.match.params;
+  return {
+    currentCategory: state.responseCurCat.currentCategory
+    // При первой загрузке страницы, когда данные с сервера не пришли
+    // catNum будет undefined, Redirect в index.js не сработает
+    //catNum: !catNum ? 0 : catNum,
+    //subCatNum: !subCatNum ? 0 : subCatNum
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getCatNum: catNum => dispatch(getCurrentCategory(catNum))
+  };
+};
+
+// Получаем данные из store. В нужном комопненте эти данные можно получить из props
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Content)
+);

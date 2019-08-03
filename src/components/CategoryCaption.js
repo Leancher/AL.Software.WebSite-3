@@ -4,8 +4,6 @@ import { catPropsName } from "../containers/catPropsName";
 
 const CategoryCaption = ({ curCat }) => {
   const { caption } = catPropsName;
-  //console.log("CategoryCaption");
-  //console.log(categories);
   return (
     // Эдемент CategoryCaption будет занимать весь ряд
     <div className="row ">

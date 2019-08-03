@@ -1,4 +1,5 @@
 import { SERVER_REQUEST_CATEGORIES } from "../actions/index";
+import { parseCompositeString } from "./parseString";
 
 const initialState = {
   categories: {
@@ -18,10 +19,7 @@ const initialState = {
   }
 };
 
-const parseCompositeString = string =>
-  string.split("&").map(item => item.split(";"));
-
-const response = (state = initialState, action) => {
+const responseCats = (state = initialState, action) => {
   switch (action.type) {
     // Редьюсер для ответ на конкретные запросы
     case SERVER_REQUEST_CATEGORIES:
@@ -37,4 +35,4 @@ const response = (state = initialState, action) => {
   }
 };
 
-export default response;
+export default responseCats;

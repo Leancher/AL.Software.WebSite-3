@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import { requestHandler } from "./requestHandler";
-import response from "./serverResponse";
+import responseCats from "./responseCats";
+import responseCurCat from "./responseCurCat";
 import catNum from "./categoryNumber";
 
 // Объединяем все редьсеры в один
@@ -10,6 +11,7 @@ import catNum from "./categoryNumber";
 // нет, то первоначальное или неопределенное.
 export const rootReducer = combineReducers({
   requestHandler,
-  response,
+  responseCats,
+  responseCurCat,
   catNum: catNum
 });

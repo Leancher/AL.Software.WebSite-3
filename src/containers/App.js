@@ -29,10 +29,8 @@ class App extends Component {
 // Вторым аргументом получаем собственные свойства. В этом случае были переданы параметры URL.
 const mapStateToProps = (state, ownProps) => {
   const { catNum, subCatNum } = ownProps.match.params;
-  console.log("App  mapStateToProps");
-  console.log(state);
   return {
-    categories: state.response.categories,
+    categories: state.responseCats.categories,
     // При первой загрузке страницы, когда данные с сервера не пришли
     // catNum будет undefined, Redirect в index.js не сработает
     catNum: !catNum ? 0 : catNum,
