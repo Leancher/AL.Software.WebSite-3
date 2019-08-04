@@ -1,4 +1,4 @@
-import { REQUEST_SEND, REQUEST_SUCCESS, REQUEST_FAIL } from "../actions/index";
+/* import { REQUEST_SEND, REQUEST_SUCCESS, REQUEST_FAIL } from "../actions/index";
 
 const initialState = {
   items: [
@@ -57,3 +57,4 @@ export const requestHandler = (state = initialState, action) => {
       });
   }
 };
+ */

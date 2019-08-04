@@ -17,13 +17,16 @@ import { getCurrentCategory } from "../actions";
 class Content extends React.Component {
   shouldComponentUpdate() {
     const catNum = this.props.match.params.catNum;
-    if (!this.props.currentCategory.isFetched) this.props.getCatNum(catNum);
+    if (!this.props.currentCategory.isFetched) this.props.getCurCat(catNum);
     console.log("Content props");
     console.log(this.props);
     return true;
   }
   render() {
-    const { curCat } = this.props;
+    const { curCat, isFetched } = this.props;
+    if (!isFetched) {
+      return null;
+    }
     return (
       <div className="col-xl-12 col-lg-9 col-md-9 col-sm-9 ContentBlock">
         <CategoryCaption curCat={curCat} />
@@ -44,8 +47,10 @@ class Content extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   //const { catNum, subCatNum } = ownProps.match.params;
+  const { currentCategory } = state.responseCats;
   return {
-    currentCategory: state.responseCurCat.currentCategory
+    currentCategory: currentCategory.items,
+    isFetched: currentCategory.isFetched
     // При первой загрузке страницы, когда данные с сервера не пришли
     // catNum будет undefined, Redirect в index.js не сработает
     //catNum: !catNum ? 0 : catNum,
@@ -55,7 +60,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCatNum: catNum => dispatch(getCurrentCategory(catNum))
+    getCurCat: catNum => dispatch(getCurrentCategory(catNum))
   };
 };
 

@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import Header from "../components/Header";
 import Body from "../components/Body";
-
-import { setCatNum } from "../actions";
 import { getCategoriesList } from "../actions";
 
 class App extends Component {
@@ -13,12 +11,12 @@ class App extends Component {
     this.props.getCatList();
   }
   render() {
-    const { categories, catNum } = this.props;
-
-    return (
+    const { categories, catNum, isFetched } = this.props;
+    // Если данные еще не пришли, ничего не показываем
+    return !isFetched ? null : (
       <React.Fragment>
-        <Header curCat={categories.items[catNum]} />
-        <Body categories={categories.items} catNum={catNum} />
+        <Header curCat={categories[catNum]} />
+        <Body categories={categories} catNum={catNum} />
       </React.Fragment>
     );
   }
@@ -29,8 +27,10 @@ class App extends Component {
 // Вторым аргументом получаем собственные свойства. В этом случае были переданы параметры URL.
 const mapStateToProps = (state, ownProps) => {
   const { catNum, subCatNum } = ownProps.match.params;
+  const { categories } = state.responseCats;
   return {
-    categories: state.responseCats.categories,
+    categories: categories.items,
+    isFetched: categories.isFetched,
     // При первой загрузке страницы, когда данные с сервера не пришли
     // catNum будет undefined, Redirect в index.js не сработает
     catNum: !catNum ? 0 : catNum,
@@ -42,8 +42,7 @@ const mapStateToProps = (state, ownProps) => {
 // компонентые. Затем в props комопненты можно вызвать соответствующие редьюсерам функции
 const mapDispatchToProps = dispatch => {
   return {
-    getCatList: () => dispatch(getCategoriesList()),
-    setCatNum: catNum => dispatch(setCatNum(catNum))
+    getCatList: () => dispatch(getCategoriesList())
   };
 };
 

@@ -5,8 +5,6 @@ import Content from "./Content";
 class Body extends React.Component {
   componentDidMount() {}
   shouldComponentUpdate(nextProps, nextState) {
-    console.log("Body shouldComponentUpdate");
-    console.log(this.props.catNum);
     return true;
   }
   render() {

@@ -1,33 +1,34 @@
-import { SERVER_REQUEST_CATEGORIES } from "../actions/index";
+import { REQUEST_CATEGORIES } from "../actions/index";
 import { parseCompositeString } from "./parseString";
-
-const initialState = {
-  categories: {
-    items: [
-      "Main",
-      "0",
-      "0",
-      "Главная",
-      "Главная страница сайта",
-      "4173",
-      "0",
-      "",
-      "0"
-    ],
-    isFetching: false,
-    error: null
-  }
-};
+import { initialState } from "./initialState";
 
 const responseCats = (state = initialState, action) => {
   switch (action.type) {
+    // Редьюсер для действия, сообщающего об отправке запроса
+    case REQUEST_CATEGORIES.SEND:
+      // Требуется новый объект, текущий не меняем
+      return Object.assign({}, state, {
+        categories: {
+          // Отправка в процессе
+          isFetched: false,
+          error: null
+        }
+      });
     // Редьюсер для ответ на конкретные запросы
-    case SERVER_REQUEST_CATEGORIES:
+    case REQUEST_CATEGORIES.SUCCESS:
       return Object.assign({}, state, {
         categories: {
           items: parseCompositeString(action.payload),
-          isFetching: false,
+          isFetched: true,
           error: null
+        }
+      });
+    // Редьюсер для неудачных ответов, записываем сообщение об ошибке.
+    case REQUEST_CATEGORIES.FAIL:
+      return Object.assign({}, state, {
+        categories: {
+          isFetched: true,
+          error: action.payload
         }
       });
     default:
