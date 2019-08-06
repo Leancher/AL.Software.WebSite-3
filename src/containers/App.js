@@ -27,7 +27,7 @@ class App extends Component {
 // Вторым аргументом получаем собственные свойства. В этом случае были переданы параметры URL.
 const mapStateToProps = (state, ownProps) => {
   const { catNum, subCatNum } = ownProps.match.params;
-  const { categories } = state.responseCats;
+  const { categories } = state;
   return {
     categories: categories.items,
     isFetched: categories.isFetched,

@@ -1,16 +1,18 @@
 import { getServerResponse } from "../containers/getServerResponse";
 
-export const REQUEST_CATEGORIES = {
-  SEND: "REQUEST_CATEGORIES_SEND",
-  SUCCESS: "REQUEST_CATEGORIES_SUCCESS",
-  FAIL: "REQUEST_CATEGORIES_FAIL"
+export const CATEGORIES_REQUEST = {
+  SEND: "CATEGORIES_REQUEST_SEND",
+  SUCCESS: "CATEGORIES_REQUEST_SUCCESS",
+  FAIL: "CATEGORIES_REQUEST_FAIL"
 };
 
-export const REQUEST_CUR_CAT = {
-  SEND: "REQUEST_CUR_CAT_SEND",
-  SUCCESS: "REQUEST_CUR_CAT_SUCCESS",
-  FAIL: "REQUEST_CUR_CAT_FAIL"
+export const CUR_CAT_REQUEST = {
+  SEND: "CUR_CAT_REQUEST_SEND",
+  SUCCESS: "CUR_CAT_REQUEST_SUCCESS",
+  FAIL: "CUR_CAT_REQUEST_FAIL"
 };
+
+export const CUR_CAT_RESET_STATE = "CUR_CAT_RESET_STATE";
 
 const buildReqStr = (command, cat = "", subCat = "", album = "", note = "") => {
   return `Command=${command}&cat=${cat}&subCat=${subCat}&album=${album}&note=${note}`;
@@ -26,12 +28,12 @@ export const getCategoriesList = () => {
   const reqStr = buildReqStr("getCategoriesList");
   // Вызываем обработчик запросов, аргументы: строка запроса
   // и действие при удачном ответе сервера
-  return requestHandler(reqStr, REQUEST_CATEGORIES);
+  return requestHandler(reqStr, CATEGORIES_REQUEST);
 };
 
 export const getCurrentCategory = catNum => {
   const reqStr = buildReqStr("getCurrentCategory", catNum);
-  return requestHandler(reqStr, REQUEST_CUR_CAT);
+  return requestHandler(reqStr, CUR_CAT_REQUEST);
 };
 
 // Асинхронное действие. Вызывается в несколько этапов. Вызываем

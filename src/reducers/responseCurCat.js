@@ -1,33 +1,58 @@
-import { REQUEST_CUR_CAT } from "../actions/index";
+import { CUR_CAT_REQUEST } from "../actions/index";
 import { parseCompositeString } from "./parseString";
-import { initialState } from "./initialState";
+//import { initialState } from "./initialState";
 
-const responseCurCat = (state = initialState, action) => {
+const initState = {
+  items: [
+    [
+      "PatternPage",
+      "5",
+      "0",
+      "Страница-шаблон",
+      "Описание странцы-щаблонв",
+      "3",
+      "1",
+      "0",
+      "1"
+    ],
+    "SubCategory",
+    "5",
+    "1",
+    "Страница-шаблон подкатегории",
+    "Описание страница-шаблона подкатегории",
+    "3",
+    "0",
+    "1",
+    "0"
+  ],
+  state: "init",
+  error: null
+};
+
+const responseCurCat = (store = initState, action) => {
   switch (action.type) {
-    case REQUEST_CUR_CAT.SEND:
-      return Object.assign({}, state, {
-        currentCategory: {
-          isFetched: false,
-          error: null
-        }
+    case CUR_CAT_REQUEST.SEND:
+      return Object.assign({}, store, {
+        state: "fetching",
+        error: null
       });
-    case REQUEST_CUR_CAT.SUCCESS:
-      return Object.assign({}, state, {
-        currentCategory: {
-          items: parseCompositeString(action.payload),
-          isFetched: true,
-          error: null
-        }
+    case CUR_CAT_REQUEST.SUCCESS:
+      console.log("REQUEST_CUR_CAT.SUCCESS");
+      const newStore = Object.assign({}, store, {
+        items: parseCompositeString(action.payload),
+        state: "success",
+        error: null
       });
-    case REQUEST_CUR_CAT.FAIL:
-      return Object.assign({}, state, {
-        currentCategory: {
-          isFetched: true,
-          error: action.payload
-        }
+      console.log(store);
+      console.log(newStore);
+      return newStore;
+    case CUR_CAT_REQUEST.FAIL:
+      return Object.assign({}, store, {
+        state: "fail",
+        error: action.payload
       });
     default:
-      return Object.assign({}, state);
+      return Object.assign({}, store);
   }
 };
 

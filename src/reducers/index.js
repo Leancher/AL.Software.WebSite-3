@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 //import { requestHandler } from "./requestHandler";
-import responseCats from "./responseCats";
-import responseCurCat from "./responseCurCat";
+import categories from "./responseCats";
+import currentCategory from "./responseCurCat";
 
 // Объединяем все редьсеры в один
 // При обновлении состояния вызываются все функции-редьюсеры
@@ -9,6 +9,6 @@ import responseCurCat from "./responseCurCat";
 // Если тип совпадает, то возврщается новое значени, если
 // нет, то первоначальное или неопределенное.
 export const rootReducer = combineReducers({
-  responseCats,
-  responseCurCat
+  categories,
+  currentCategory
 });
