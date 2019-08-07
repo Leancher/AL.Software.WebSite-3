@@ -3,16 +3,16 @@ import { getServerResponse } from "../containers/getServerResponse";
 export const CATEGORIES_REQUEST = {
   SEND: "CATEGORIES_REQUEST_SEND",
   SUCCESS: "CATEGORIES_REQUEST_SUCCESS",
-  FAIL: "CATEGORIES_REQUEST_FAIL"
+  FAIL: "CATEGORIES_REQUEST_FAIL",
+  RESET: "CATEGORIES_REQUEST_RESET"
 };
 
 export const CUR_CAT_REQUEST = {
   SEND: "CUR_CAT_REQUEST_SEND",
   SUCCESS: "CUR_CAT_REQUEST_SUCCESS",
-  FAIL: "CUR_CAT_REQUEST_FAIL"
+  FAIL: "CUR_CAT_REQUEST_FAIL",
+  RESET: "CUR_CAT_REQUEST_RESET"
 };
-
-export const CUR_CAT_RESET_STATE = "CUR_CAT_RESET_STATE";
 
 const buildReqStr = (command, cat = "", subCat = "", album = "", note = "") => {
   return `Command=${command}&cat=${cat}&subCat=${subCat}&album=${album}&note=${note}`;
@@ -42,18 +42,21 @@ export const getCurrentCategory = catNum => {
 // действие.
 const requestHandler = (requestString, type) => {
   return dispatch => {
-    // Вызываем действие и делаем запрос на сервер
+    // Вызываем действие и сбрасываем состояние
+    dispatch({
+      type: type.RESET
+    });
+    // Вызываем действие и сообщаем, что собираемся делать запрос
     dispatch({
       type: type.SEND
     });
-    return getServerResponse(requestString)
+    getServerResponse(requestString)
       .then(response => {
         // При удачном ответе, вызываем действие в соответствии с запросом
         dispatch({
           type: type.SUCCESS,
           payload: response
         });
-        return;
       })
       .catch(error => {
         // При неудачно - вызываем действие для ошибки

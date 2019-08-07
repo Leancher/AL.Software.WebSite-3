@@ -37,19 +37,21 @@ const responseCurCat = (store = initState, action) => {
         error: null
       });
     case CUR_CAT_REQUEST.SUCCESS:
-      console.log("REQUEST_CUR_CAT.SUCCESS");
       const newStore = Object.assign({}, store, {
         items: parseCompositeString(action.payload),
         state: "success",
         error: null
       });
-      console.log(store);
-      console.log(newStore);
       return newStore;
     case CUR_CAT_REQUEST.FAIL:
       return Object.assign({}, store, {
         state: "fail",
         error: action.payload
+      });
+    case CUR_CAT_REQUEST.RESET:
+      return Object.assign({}, store, {
+        state: "init",
+        error: null
       });
     default:
       return Object.assign({}, store);

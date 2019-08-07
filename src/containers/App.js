@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { Redirect } from "react-router-dom";
 import Header from "../components/Header";
 import Body from "../components/Body";
 import { getCategoriesList } from "../actions";
@@ -12,6 +13,8 @@ class App extends Component {
   }
   render() {
     const { categories, catNum, isFetched } = this.props;
+    // Если catNum неопределен (т.е. путь "/"), то перенаправляем на главную страницу
+    if (!catNum) return <Redirect from="/" to="/0" />;
     // Если данные еще не пришли, ничего не показываем
     return !isFetched ? null : (
       <React.Fragment>

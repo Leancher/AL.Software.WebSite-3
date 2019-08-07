@@ -15,44 +15,46 @@ import { getCurrentCategory } from "../actions";
 } = catPropsName; */
 
 class Content extends React.Component {
-  shouldComponentUpdate() {
-    return true;
+  componentDidMount() {
+    const { catNum, getCurCat } = this.props;
+    // Вызываем при первой загрузке страницы, когда никаких данных еще не было
+    getCurCat(catNum);
+  }
+  // Метод вызывается сразу после обновления, аргумент - предыдущее состояние
+  componentDidUpdate(prevProps) {
+    const { getCurCat, catNum } = this.props;
+    // Сравниваем предыдущее состояние с текущим. Если не равны, то
+    // делаем запрос на категорию. Когда придет ответ, состояния будут уже равны
+    // и запрос больше не выполнится
+    if (prevProps.catNum !== catNum) getCurCat(catNum);
   }
   render() {
-    const { curCat, catNum, state, getCurCat } = this.props;
-
-    if (state === "init") {
-      getCurCat(catNum);
-      //return null;
-    }
-    console.log("curCat");
-    console.log(state);
+    const { curCat, state } = this.props;
     return (
       <React.Fragment>
-        {state === "success"
-          ? "Success"
-          : // <div className="col-xl-12 col-lg-9 col-md-9 col-sm-9 ContentBlock">
-            //   <CategoryCaption curCat={curCat} />
-            //   <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 no-gutters">
-            //     Redux is a predictable state container for JavaScript apps. It
-            //     helps you write applications that behave consistently, run in
-            //     different environments (client, server, and native), and are easy
-            //     to test. On top of that, it provides a great developer experience,
-            //     such as live code editing combined with a time traveling debugger.
-            //     You can use Redux together with React, or with any other view
-            //     library. It is tiny (2kB, including dependencies), but has a large
-            //     ecosystem of addons available.
-            //   </div>
-            // </div>
-            null}
+        {state === "success" ? (
+          <div className="col-xl-12 col-lg-9 col-md-9 col-sm-9 ContentBlock">
+            <CategoryCaption curCat={curCat[0]} />
+            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 no-gutters">
+              Redux is a predictable state container for JavaScript apps. It
+              helps you write applications that behave consistently, run in
+              different environments (client, server, and native), and are easy
+              to test. On top of that, it provides a great developer experience,
+              such as live code editing combined with a time traveling debugger.
+              You can use Redux together with React, or with any other view
+              library. It is tiny (2kB, including dependencies), but has a large
+              ecosystem of addons available.
+            </div>
+          </div>
+        ) : null}
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (store, ownProps) => {
   const { catNum } = ownProps.match.params;
-  const { currentCategory } = state;
+  const { currentCategory } = store;
   return {
     catNum: catNum,
     curCat: currentCategory.items,
