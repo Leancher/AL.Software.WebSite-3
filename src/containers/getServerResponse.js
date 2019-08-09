@@ -10,24 +10,3 @@ export const getServerResponse = requestString => {
     xhr.send();
   });
 };
-
-/* export const getServerResponse = (
-  command,
-  cat = "",
-  subCat = "",
-  album = "",
-  note = ""
-) => {
-  return httpGet(
-    "Command=" +
-      command +
-      "&cat=" +
-      cat +
-      "&subCat=" +
-      subCat +
-      "&album=" +
-      album +
-      "&note=" +
-      note
-  );
-}; */

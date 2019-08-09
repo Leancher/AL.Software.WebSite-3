@@ -1,6 +1,6 @@
 import React from "react";
-import { catPropsName } from "../containers/catPropsName";
 import { NavLink } from "react-router-dom";
+import { catPropsName } from "../containers/catPropsName";
 
 const NavigationMenu = ({ categories }) => {
   const { caption } = catPropsName;

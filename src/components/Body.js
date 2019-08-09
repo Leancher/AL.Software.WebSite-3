@@ -3,10 +3,6 @@ import NavigationMenu from "./NavigationMenu";
 import Content from "./Content";
 
 class Body extends React.Component {
-  componentDidMount() {}
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
-  }
   render() {
     const { categories, catNum } = this.props;
     return (

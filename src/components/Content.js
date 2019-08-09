@@ -3,16 +3,17 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import CategoryCaption from "./CategoryCaption";
 import { getCurrentCategory } from "../actions";
-//import { catPropsName } from "../containers/catPropsName";
+import { catPropsName } from "../containers/catPropsName";
+import BuildTileGrid from "./TileGrid";
 
-/* const {
+const {
   name,
   caption,
   description,
   isPhotoAlbum,
   isTileGrid,
   isArticle
-} = catPropsName; */
+} = catPropsName;
 
 class Content extends React.Component {
   componentDidMount() {
@@ -29,21 +30,18 @@ class Content extends React.Component {
     if (prevProps.catNum !== catNum) getCurCat(catNum);
   }
   render() {
-    const { curCat, state } = this.props;
+    const { subCats, catCaption, catIsTileGrid, state } = this.props;
     return (
       <React.Fragment>
         {state === "success" ? (
           <div className="col-xl-12 col-lg-9 col-md-9 col-sm-9 ContentBlock">
-            <CategoryCaption curCat={curCat[0]} />
+            <CategoryCaption catCaption={catCaption} />
             <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 no-gutters">
-              Redux is a predictable state container for JavaScript apps. It
-              helps you write applications that behave consistently, run in
-              different environments (client, server, and native), and are easy
-              to test. On top of that, it provides a great developer experience,
-              such as live code editing combined with a time traveling debugger.
-              You can use Redux together with React, or with any other view
-              library. It is tiny (2kB, including dependencies), but has a large
-              ecosystem of addons available.
+              {catIsTileGrid === "1" ? (
+                <BuildTileGrid subCats={subCats} />
+              ) : (
+                "currentCategory"
+              )}
             </div>
           </div>
         ) : null}
@@ -53,16 +51,18 @@ class Content extends React.Component {
 }
 
 const mapStateToProps = (store, ownProps) => {
+  const { categories, currentCategory } = store;
   const { catNum } = ownProps.match.params;
-  const { currentCategory } = store;
+  const catProps = categories.items[catNum];
   return {
     catNum: catNum,
-    curCat: currentCategory.items,
-    state: currentCategory.state
-    // При первой загрузке страницы, когда данные с сервера не пришли
-    // catNum будет undefined, Redirect в index.js не сработает
-    //catNum: !catNum ? 0 : catNum,
-    //subCatNum: !subCatNum ? 0 : subCatNum
+    subCats: currentCategory.items,
+    state: currentCategory.state,
+    catName: catProps[name],
+    catTitle: catProps[name],
+    catCaption: catProps[caption],
+    catDesc: catProps[description],
+    catIsTileGrid: catProps[isTileGrid]
   };
 };
 

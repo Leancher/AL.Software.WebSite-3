@@ -1,6 +1,5 @@
 import React from "react";
 import { catPropsName } from "../containers/catPropsName";
-import { buildLink } from "./utilites";
 
 const Header = ({ curCat }) => {
   const { name } = catPropsName;
@@ -15,7 +14,7 @@ const Header = ({ curCat }) => {
         </a>
       </div>
       <div className="HeaderMenu">
-        <a href={buildLink(8)}>Статистика</a>
+        <a href={"#stat"}>Статистика</a>
         <a href="#linkAbout">О сайте</a>
       </div>
     </div>

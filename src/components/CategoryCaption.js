@@ -1,9 +1,7 @@
 import React from "react";
 // import DropdownMenu from "./DropdownMenu";
-import { catPropsName } from "../containers/catPropsName";
 
-const CategoryCaption = ({ curCat }) => {
-  const { caption } = catPropsName;
+const CategoryCaption = ({ catCaption }) => {
   return (
     // Эдемент CategoryCaption будет занимать весь ряд
     <div className="row ">
@@ -27,7 +25,7 @@ const CategoryCaption = ({ curCat }) => {
             </div>
           </div>
           {/* Элемент caption занимает 10 колонок */}
-          <div className="col-10">{curCat[caption]}</div>
+          <div className="col-10">{catCaption}</div>
         </div>
       </div>
     </div>
