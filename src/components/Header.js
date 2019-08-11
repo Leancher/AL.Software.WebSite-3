@@ -1,5 +1,7 @@
 import React from "react";
-import { catPropsName } from "../containers/catPropsName";
+import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
+import { catPropsName } from "../Utilites/catPropsName";
 
 const Header = ({ curCat }) => {
   const { name } = catPropsName;
@@ -8,10 +10,10 @@ const Header = ({ curCat }) => {
   return (
     <div className="row justify-content-between header">
       <div className="HeaderTitle">
-        <a href="/">
+        <NavLink to={"/0"}>
           <img src={"./Pictures/Logo/" + logoName + ".png"} alt="logo" />
           LEANCHER
-        </a>
+        </NavLink>
       </div>
       <div className="HeaderMenu">
         <a href={"#stat"}>Статистика</a>
@@ -19,6 +21,10 @@ const Header = ({ curCat }) => {
       </div>
     </div>
   );
+};
+
+Header.prototypes = {
+  curCat: PropTypes.object.isRequired
 };
 
 export default Header;

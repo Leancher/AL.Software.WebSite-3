@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 // import DropdownMenu from "./DropdownMenu";
 
 const CategoryCaption = ({ catCaption }) => {
@@ -30,6 +31,10 @@ const CategoryCaption = ({ catCaption }) => {
       </div>
     </div>
   );
+};
+
+CategoryCaption.prototypes = {
+  catCaption: PropTypes.string.isRequired
 };
 
 export default CategoryCaption;

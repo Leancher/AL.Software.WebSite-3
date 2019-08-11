@@ -1,19 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import PropTypes from "prop-types";
 import CategoryCaption from "./CategoryCaption";
-import { getCurrentCategory } from "../actions";
-import { catPropsName } from "../containers/catPropsName";
+import { getCurrentCategory } from "../actions/getCurrentCategory";
+import { catPropsName } from "../Utilites/catPropsName";
 import BuildTileGrid from "./TileGrid";
 
-const {
-  name,
-  caption,
-  description,
-  isPhotoAlbum,
-  isTileGrid,
-  isArticle
-} = catPropsName;
+const { name, caption, description, isTileGrid } = catPropsName;
 
 class Content extends React.Component {
   componentDidMount() {
@@ -70,6 +64,17 @@ const mapDispatchToProps = dispatch => {
   return {
     getCurCat: catNum => dispatch(getCurrentCategory(catNum))
   };
+};
+
+Content.prototypes = {
+  catNum: PropTypes.string.isRequired,
+  subCats: PropTypes.array.isRequired,
+  state: PropTypes.string.isRequired,
+  catName: PropTypes.string.isRequired,
+  catTitle: PropTypes.string.isRequired,
+  catCaption: PropTypes.string.isRequired,
+  catDesc: PropTypes.string.isRequired,
+  catIsTileGrid: PropTypes.string.isRequired
 };
 
 // Получаем данные из store. В нужном комопненте эти данные можно получить из props

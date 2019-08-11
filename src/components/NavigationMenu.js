@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
-import { catPropsName } from "../containers/catPropsName";
+import { catPropsName } from "../Utilites/catPropsName";
 
 const NavigationMenu = ({ categories }) => {
   const { caption } = catPropsName;
@@ -18,6 +19,10 @@ const NavigationMenu = ({ categories }) => {
       </div>
     </div>
   );
+};
+
+NavigationMenu.prototypes = {
+  categories: PropTypes.array.isRequired
 };
 
 export default NavigationMenu;

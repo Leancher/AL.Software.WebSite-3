@@ -1,6 +1,5 @@
-import { CUR_CAT_REQUEST } from "../actions/index";
+import { CUR_CAT_REQUEST } from "../actions/getCurrentCategory";
 import { parseCompositeString } from "./parseString";
-//import { initialState } from "./initialState";
 
 const initState = {
   items: [

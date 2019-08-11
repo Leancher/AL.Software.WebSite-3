@@ -1,46 +1,20 @@
-import { getServerResponse } from "../containers/getServerResponse";
+import { getServerResponse } from "../Utilites/serverResponse";
 
-export const CATEGORIES_REQUEST = {
-  SEND: "CATEGORIES_REQUEST_SEND",
-  SUCCESS: "CATEGORIES_REQUEST_SUCCESS",
-  FAIL: "CATEGORIES_REQUEST_FAIL",
-  RESET: "CATEGORIES_REQUEST_RESET"
-};
-
-export const CUR_CAT_REQUEST = {
-  SEND: "CUR_CAT_REQUEST_SEND",
-  SUCCESS: "CUR_CAT_REQUEST_SUCCESS",
-  FAIL: "CUR_CAT_REQUEST_FAIL",
-  RESET: "CUR_CAT_REQUEST_RESET"
-};
-
-const buildReqStr = (command, cat = "", subCat = "", album = "", note = "") => {
+export const buildReqStr = (
+  command,
+  cat = "",
+  subCat = "",
+  album = "",
+  note = ""
+) => {
   return `Command=${command}&cat=${cat}&subCat=${subCat}&album=${album}&note=${note}`;
-};
-
-export const setCatNum = catNum => ({
-  type: "SET_CATEGORY_NUMBER",
-  payload: catNum
-});
-
-export const getCategoriesList = () => {
-  // Формируем строку запроса
-  const reqStr = buildReqStr("getCategoriesList");
-  // Вызываем обработчик запросов, аргументы: строка запроса
-  // и действие при удачном ответе сервера
-  return requestHandler(reqStr, CATEGORIES_REQUEST);
-};
-
-export const getCurrentCategory = catNum => {
-  const reqStr = buildReqStr("getCurrentCategory", catNum);
-  return requestHandler(reqStr, CUR_CAT_REQUEST);
 };
 
 // Асинхронное действие. Вызывается в несколько этапов. Вызываем
 // действие REQUEST_SEND, делаем запрос HTTP.
 // Затем по результатам запроса через промис происходит соответствующее
 // действие.
-const requestHandler = (requestString, type) => {
+export const requestHandler = (requestString, type) => {
   return dispatch => {
     // Вызываем действие и сбрасываем состояние
     dispatch({

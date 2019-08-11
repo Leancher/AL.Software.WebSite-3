@@ -1,43 +1,44 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Redirect } from "react-router-dom";
-import Header from "../components/Header";
-import Body from "../components/Body";
-import { getCategoriesList } from "../actions";
+import PropTypes from "prop-types";
+import Header from "./Header";
+import Body from "./Body";
+import { getCategoriesList } from "../actions/getCategoriesList";
 
-class App extends Component {
+class Default extends Component {
   componentDidMount() {
     // Редьюсер асинхронный, вызываем его в этом месте.
     this.props.getCatList();
   }
   render() {
-    const { categories, catNum, isFetched } = this.props;
+    const { categories, catNum, state } = this.props;
     // Если catNum неопределен (т.е. путь "/"), то перенаправляем на главную страницу
     if (!catNum) return <Redirect from="/" to="/0" />;
     // Если данные еще не пришли, ничего не показываем
-    return !isFetched ? null : (
-      <React.Fragment>
+    return state === "success" ? (
+      <Fragment>
         <Header curCat={categories[catNum]} />
         <Body categories={categories} catNum={catNum} />
-      </React.Fragment>
-    );
+      </Fragment>
+    ) : null;
   }
 }
 
 // В mapStateToProps указываем только те значения из store, которые нужны для этого компоненты (в этом случае App).
 // Перерисовка компонента проихсодит только при обновлении этих данных.
 // Вторым аргументом получаем собственные свойства. В этом случае были переданы параметры URL.
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (store, ownProps) => {
   const { catNum, subCatNum } = ownProps.match.params;
-  const { categories } = state;
+  const { categories } = store;
   return {
     categories: categories.items,
-    isFetched: categories.isFetched,
+    state: categories.state,
     // При первой загрузке страницы, когда данные с сервера не пришли
     // catNum будет undefined, Redirect в index.js не сработает
-    catNum: !catNum ? 0 : catNum,
-    subCatNum: !subCatNum ? 0 : subCatNum
+    catNum: !catNum ? "0" : catNum,
+    subCatNum: !subCatNum ? "0" : subCatNum
   };
 };
 
@@ -49,10 +50,18 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-// Получаем данные из store. В нужном комопненте эти данные можно получить из props
+Default.propTypes = {
+  getCatList: PropTypes.func.isRequired,
+  categories: PropTypes.array.isRequired,
+  state: PropTypes.string.isRequired,
+  catNum: PropTypes.string.isRequired,
+  subCatNum: PropTypes.string
+};
+
+// Получаем данные из store. В подключаемом компоненте (App) эти данные можно получить из props
 export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(App)
+  )(Default)
 );
