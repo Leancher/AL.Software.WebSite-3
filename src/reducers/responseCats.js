@@ -1,7 +1,7 @@
 import { CATEGORIES_REQUEST } from "../actions/getCategoriesList";
 import { parseCompositeString } from "./parseString";
 
-const initState = {
+export const initState = {
   items: [
     "Main",
     "0",
@@ -17,7 +17,7 @@ const initState = {
   error: null
 };
 
-const responseCats = (state = initState, action) => {
+export const categories = (state = initState, action) => {
   switch (action.type) {
     // Редьюсер для действия, сообщающего об отправке запроса
     case CATEGORIES_REQUEST.SEND:
@@ -44,5 +44,3 @@ const responseCats = (state = initState, action) => {
       return Object.assign({}, state);
   }
 };
-
-export default responseCats;
