@@ -1,16 +1,18 @@
 import { buildReqStr, requestHandler } from "./requestHundler";
 
-export const CATEGORIES_REQUEST = {
+export const CAT_REQUEST_TYPES = {
   SEND: "CATEGORIES_REQUEST_SEND",
   SUCCESS: "CATEGORIES_REQUEST_SUCCESS",
   FAIL: "CATEGORIES_REQUEST_FAIL",
   RESET: "CATEGORIES_REQUEST_RESET"
 };
 
-export const getCategoriesList = () => {
+export function getCategoriesList() {
   // Формируем строку запроса
   const reqStr = buildReqStr("getCategoriesList");
-  // Вызываем обработчик запросов, аргументы: строка запроса
-  // и список действий для обработки результата
-  return requestHandler(reqStr, CATEGORIES_REQUEST);
-};
+  return dispatch => {
+    // Вызываем обработчик запросов, аргументы: dispatch для вызова других действий,
+    // строка запроса и список действий для обработки результата
+    return requestHandler(dispatch, reqStr, CAT_REQUEST_TYPES);
+  };
+}

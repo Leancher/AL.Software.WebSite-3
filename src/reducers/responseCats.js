@@ -1,6 +1,5 @@
-import { CATEGORIES_REQUEST } from "../actions/getCategoriesList";
-import { parseCompositeString } from "./parseString";
-
+import { CAT_REQUEST_TYPES } from "../actions/getCategoriesList";
+import { parseCompositeString } from "../Utilites/parseString";
 export const initState = {
   items: [
     "Main",
@@ -20,7 +19,7 @@ export const initState = {
 export const categories = (state = initState, action) => {
   switch (action.type) {
     // Редьюсер для действия, сообщающего об отправке запроса
-    case CATEGORIES_REQUEST.SEND:
+    case CAT_REQUEST_TYPES.SEND:
       // Требуется новый объект, текущий не меняем
       return Object.assign({}, state, {
         // Отправка в процессе
@@ -28,14 +27,14 @@ export const categories = (state = initState, action) => {
         error: null
       });
     // Редьюсер для ответ на конкретные запросы
-    case CATEGORIES_REQUEST.SUCCESS:
+    case CAT_REQUEST_TYPES.SUCCESS:
       return Object.assign({}, state, {
         items: parseCompositeString(action.payload),
         state: "success",
         error: null
       });
     // Редьюсер для неудачных ответов, записываем сообщение об ошибке.
-    case CATEGORIES_REQUEST.FAIL:
+    case CAT_REQUEST_TYPES.FAIL:
       return Object.assign({}, state, {
         state: "fail",
         error: action.payload

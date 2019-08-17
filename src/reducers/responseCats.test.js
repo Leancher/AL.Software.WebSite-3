@@ -1,5 +1,5 @@
 import { initState, categories } from "./responseCats";
-import { CATEGORIES_REQUEST } from "../actions/getCategoriesList";
+import { CAT_REQUEST_TYPES } from "../actions/getCategoriesList";
 
 describe("categories Reducer", () => {
   it("Should return the initial state", () => {
@@ -10,7 +10,7 @@ describe("categories Reducer", () => {
       categories(
         {},
         {
-          type: CATEGORIES_REQUEST.SEND
+          type: CAT_REQUEST_TYPES.SEND
         }
       )
     ).toEqual({
@@ -23,7 +23,7 @@ describe("categories Reducer", () => {
       categories(
         {},
         {
-          type: CATEGORIES_REQUEST.FAIL,
+          type: CAT_REQUEST_TYPES.FAIL,
           payload: "error"
         }
       )
@@ -37,7 +37,7 @@ describe("categories Reducer", () => {
       categories(
         {},
         {
-          type: CATEGORIES_REQUEST.SUCCESS,
+          type: CAT_REQUEST_TYPES.SUCCESS,
           payload: "item11;item12&item21;item22"
         }
       )

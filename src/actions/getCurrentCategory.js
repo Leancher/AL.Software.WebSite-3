@@ -9,5 +9,7 @@ export const CUR_CAT_REQUEST = {
 
 export const getCurrentCategory = catNum => {
   const reqStr = buildReqStr("getCurrentCategory", catNum);
-  return requestHandler(reqStr, CUR_CAT_REQUEST);
+  return dispatch => {
+    return requestHandler(dispatch, reqStr, CUR_CAT_REQUEST);
+  };
 };

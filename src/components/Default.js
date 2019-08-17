@@ -35,10 +35,8 @@ const mapStateToProps = (store, ownProps) => {
   return {
     categories: categories.items,
     state: categories.state,
-    // При первой загрузке страницы, когда данные с сервера не пришли
-    // catNum будет undefined, Redirect в index.js не сработает
-    catNum: !catNum ? "0" : catNum,
-    subCatNum: !subCatNum ? "0" : subCatNum
+    catNum: catNum,
+    subCatNum: subCatNum
   };
 };
 

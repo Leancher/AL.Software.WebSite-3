@@ -14,30 +14,28 @@ export const buildReqStr = (
 // действие REQUEST_SEND, делаем запрос HTTP.
 // Затем по результатам запроса через промис происходит соответствующее
 // действие.
-export const requestHandler = (requestString, type) => {
-  return dispatch => {
-    // Вызываем действие и сбрасываем состояние
-    dispatch({
-      type: type.RESET
-    });
-    // Вызываем действие и сообщаем, что собираемся делать запрос
-    dispatch({
-      type: type.SEND
-    });
-    getServerResponse(requestString)
-      .then(response => {
-        // При удачном ответе, вызываем действие в соответствии с запросом
-        dispatch({
-          type: type.SUCCESS,
-          payload: response
-        });
-      })
-      .catch(error => {
-        // При неудачно - вызываем действие для ошибки
-        dispatch({
-          type: type.FAIL,
-          payload: error
-        });
+export const requestHandler = (dispatch, requestString, type) => {
+  // Вызываем действие и сбрасываем состояние
+  dispatch({
+    type: type.RESET
+  });
+  // Вызываем действие и сообщаем, что собираемся делать запрос
+  dispatch({
+    type: type.SEND
+  });
+  return getServerResponse(requestString)
+    .then(response => {
+      // При удачном ответе, вызываем действие в соответствии с запросом
+      dispatch({
+        type: type.SUCCESS,
+        payload: response
       });
-  };
+    })
+    .catch(error => {
+      // При неудачном - вызываем действие для ошибки
+      dispatch({
+        type: type.FAIL,
+        payload: error
+      });
+    });
 };
