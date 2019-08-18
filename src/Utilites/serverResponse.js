@@ -1,4 +1,6 @@
 const SERVER_URL = "http://192.168.0.100:8090/Server.aspx";
+//const SERVER_URL = "http://localhost:53492/Server.aspx";
+//const SERVER_URL = 'http://localhost:50958/Server.aspx'
 
 export const getServerResponse = requestString => {
   const url = SERVER_URL + "?" + requestString;
