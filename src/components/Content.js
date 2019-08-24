@@ -46,7 +46,7 @@ class Content extends React.Component {
 
 const mapStateToProps = (store, ownProps) => {
   const { categories, currentCategory } = store;
-  const { catNum } = ownProps.match.params;
+  const catNum = ownProps.catNum;
   const catProps = categories.items[catNum];
   return {
     catNum: catNum,
@@ -78,9 +78,13 @@ Content.prototypes = {
 };
 
 // Получаем данные из store. В нужном комопненте эти данные можно получить из props
-export default withRouter(
+/* export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
   )(Content)
-);
+); */
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Content);
