@@ -1,22 +1,8 @@
 import { CAT_REQUEST_TYPES } from "../actions/getCategoriesList";
 import { parseCompositeString } from "../Utilites/parseString";
-export const initState = {
-  items: [
-    "Main",
-    "0",
-    "0",
-    "Главная",
-    "Главная страница сайта",
-    "4173",
-    "0",
-    "",
-    "0"
-  ],
-  state: "init",
-  error: null
-};
+import { catsInitStore } from "../store";
 
-export const categories = (state = initState, action) => {
+export const categories = (state = catsInitStore, action) => {
   switch (action.type) {
     // Редьюсер для действия, сообщающего об отправке запроса
     case CAT_REQUEST_TYPES.SEND:

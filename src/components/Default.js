@@ -50,9 +50,9 @@ const mapDispatchToProps = dispatch => {
 
 Default.propTypes = {
   getCatList: PropTypes.func.isRequired,
-  categories: PropTypes.array.isRequired,
-  state: PropTypes.string.isRequired,
-  catNum: PropTypes.string.isRequired,
+  categories: PropTypes.array,
+  state: PropTypes.string,
+  catNum: PropTypes.string,
   subCatNum: PropTypes.string
 };
 

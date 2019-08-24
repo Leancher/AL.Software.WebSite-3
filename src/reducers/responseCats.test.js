@@ -1,9 +1,10 @@
-import { initState, categories } from "./responseCats";
+import { categories } from "./responseCats";
+import { catsInitStore } from "../store";
 import { CAT_REQUEST_TYPES } from "../actions/getCategoriesList";
 
 describe("categories Reducer", () => {
   it("Should return the initial state", () => {
-    expect(categories(undefined, {})).toEqual(initState);
+    expect(categories(undefined, {})).toEqual(catsInitStore);
   });
   it("Should return fetching state", () => {
     expect(

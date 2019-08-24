@@ -1,5 +1,5 @@
 module.exports = {
-  presets: ["@babel/preset-env", "@babel/preset-react", "@babel/preset-flow"],
+  presets: ["@babel/env", "@babel/preset-flow", "react-app"],
   plugins: [
     "babel-plugin-styled-components",
     "@babel/plugin-proposal-class-properties"

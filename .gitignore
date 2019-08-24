@@ -10,6 +10,7 @@ Thing90/
 *.cmd
 css
 js
+__snapshots__/
 
 # User-specific files
 *.suo

@@ -7,7 +7,7 @@ const Body = ({ categories, catNum }) => {
   return (
     <div className="row">
       <NavigationMenu categories={categories} />
-      <Content curCat={categories[catNum]} />
+      <Content curCat={categories[catNum]} catNum={catNum} />
     </div>
   );
 };
