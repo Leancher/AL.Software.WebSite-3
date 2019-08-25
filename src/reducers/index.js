@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
-//import { requestHandler } from "./requestHandler";
 import { categories } from "./responseCats";
-import currentCategory from "./responseCurCat";
+import { currentCategory } from "./responseCurCat";
 
 // Объединяем все редьсеры в один
 // При обновлении состояния вызываются все функции-редьюсеры

@@ -2,7 +2,7 @@ import { CUR_CAT_REQUEST } from "../actions/getCurrentCategory";
 import { parseCompositeString } from "../Utilites/parseString";
 import { curCatInitStore } from "../store";
 
-const responseCurCat = (store = curCatInitStore, action) => {
+export const currentCategory = (store = curCatInitStore, action) => {
   switch (action.type) {
     case CUR_CAT_REQUEST.SEND:
       return Object.assign({}, store, {
@@ -30,5 +30,3 @@ const responseCurCat = (store = curCatInitStore, action) => {
       return Object.assign({}, store);
   }
 };
-
-export default responseCurCat;
