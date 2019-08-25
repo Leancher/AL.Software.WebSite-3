@@ -1,8 +1,9 @@
 {
-  "name": "redux-course-ru-v2",
+  "name": "leancher-web-site-v-3",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
@@ -29,9 +30,7 @@
     "eslint": "node_modules/.bin/eslint src/"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.5.5",
-    "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.4.2",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
