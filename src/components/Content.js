@@ -9,7 +9,7 @@ import BuildTileGrid from "./TileGrid";
 
 const { name, caption, description, isTileGrid } = catPropsName;
 
-class Content extends React.Component {
+export class Content extends React.Component {
   componentDidMount() {
     const { catNum, getCurCat } = this.props;
     // Вызываем при первой загрузке страницы, когда никаких данных еще не было
@@ -77,13 +77,6 @@ Content.prototypes = {
   catIsTileGrid: PropTypes.string.isRequired
 };
 
-// Получаем данные из store. В нужном комопненте эти данные можно получить из props
-/* export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Content)
-); */
 export default connect(
   mapStateToProps,
   mapDispatchToProps

@@ -11,6 +11,7 @@ Thing90/
 css
 js
 __snapshots__/
+coverage/
 
 # User-specific files
 *.suo

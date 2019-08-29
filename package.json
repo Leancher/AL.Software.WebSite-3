@@ -24,7 +24,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
-    "test:watch": "npm test -- --watch",
+    "test-watch": "npm test -- --watch",
+    "test-coverage": "npm test -- --coverage",
+    "test-single": "npm test -- -t='CategoryCaption-Body'",
     "eject": "react-scripts eject",
     "precommit": "lint-staged",
     "eslint": "node_modules/.bin/eslint src/"
@@ -39,6 +41,7 @@
     "fetch-mock": "^7.3.9",
     "husky": "^0.14.3",
     "jest": "^24.9.0",
+    "jest-cli": "^24.9.0",
     "lint-staged": "^7.2.0",
     "prettier": "^1.14.0",
     "redux-logger": "^3.0.6"
