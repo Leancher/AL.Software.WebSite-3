@@ -45,18 +45,20 @@ export class Content extends React.Component {
 }
 
 const mapStateToProps = (store, ownProps) => {
-  const { categories, currentCategory } = store;
-  const catNum = ownProps.catNum;
-  const catProps = categories.items[catNum];
+  console.log("ownProps");
+  console.log(ownProps);
+  const { currentCategory } = store;
+  const { catNum, curCatProps } = ownProps;
+  //const catProps = categories.items[catNum];
   return {
     catNum: catNum,
     subCats: currentCategory.items,
     state: currentCategory.state,
-    catName: catProps[name],
-    catTitle: catProps[name],
-    catCaption: catProps[caption],
-    catDesc: catProps[description],
-    catIsTileGrid: catProps[isTileGrid]
+    catName: curCatProps[name],
+    catTitle: curCatProps[name],
+    catCaption: curCatProps[caption],
+    catDesc: curCatProps[description],
+    catIsTileGrid: curCatProps[isTileGrid]
   };
 };
 
