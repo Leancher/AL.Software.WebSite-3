@@ -9,7 +9,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import thunk from "redux-thunk";
 import "../Utilites/setupTest";
 
-import Body from "./Body";
+import Body from "../components/Body";
 
 describe("CategoryCaption-Body", () => {
   const mockStore = configureStore([thunk]);

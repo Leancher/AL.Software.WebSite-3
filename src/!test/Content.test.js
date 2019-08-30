@@ -7,14 +7,14 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import "../Utilites/setupTest";
 
-import ConnectedContent from "./Content";
+import ConnectedContent from "../components/Content";
 
 describe("ComponentTest-Content", () => {
   const mockStore = configureStore([thunk]);
   const store = mockStore({ categories, currentCategory });
   const wrapper = mount(
     <Provider store={store}>
-      <ConnectedContent catNum={5} />
+      <ConnectedContent curCatProps={categories.items} catNum={5} />
     </Provider>
   );
 
