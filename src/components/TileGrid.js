@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
 import { catPropsName } from "../Utilites/catPropsName";
 const { name, caption } = catPropsName;
 
-const buildTailCell = (index, name, caption) => {
-  const picName = name + index + ".jpg";
+const buildTailCell = (catNum, subCatNum, name, caption) => {
+  const picName = name + subCatNum + ".jpg";
+  const link = "/" + catNum + "/" + subCatNum;
   return (
-    <div className="TileCell" key={index}>
-      <a href="#nolink" /* {buildLink(this.props.catNum, index)} */>
+    <div className="TileCell" key={subCatNum}>
+      <NavLink id={subCatNum} key={subCatNum} to={link}>
         <div className="TileCellPic">
           <img src={"./Pictures/Preview/" + picName} alt={picName} />
         </div>
@@ -19,18 +21,23 @@ const buildTailCell = (index, name, caption) => {
             <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           ) : null}
         </div>
-      </a>
+      </NavLink>
     </div>
   );
 };
 
-const TileGrid = ({ subCats }) => {
+const TileGrid = ({ catNum, subCats }) => {
   return (
     <div className="TileGrid">
-      {subCats.map((category, index) => {
+      {subCats.map((category, subCatNum) => {
         //Массив начинается с 0, таблицв БД с 1, первый элемент пустой
-        if (index === 0) return "";
-        return buildTailCell(index, category[name], category[caption]);
+        if (subCatNum === 0) return "";
+        return buildTailCell(
+          catNum,
+          subCatNum,
+          category[name],
+          category[caption]
+        );
       })}
     </div>
   );

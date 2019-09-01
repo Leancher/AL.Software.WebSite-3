@@ -8,19 +8,29 @@ import Body from "./Body";
 import { getCategoriesList } from "../actions/getCategoriesList";
 
 class Default extends Component {
+  UNSAFE_componentWillReceiveProps() {
+    return true;
+  }
+  UNSAFE_componentWillUpdate() {
+    return true;
+  }
   componentDidMount() {
     // Редьюсер асинхронный, вызываем его в этом месте.
     this.props.getCatList();
   }
   render() {
-    const { categories, catNum, state } = this.props;
+    const { categories, catNum, state, subCatNum } = this.props;
+    console.log("Default render");
+    console.log(subCatNum);
     // Если catNum неопределен (т.е. путь "/"), то перенаправляем на главную страницу
     if (!catNum) return <Redirect from="/" to="/0" />;
+    //if (!subCatNum)return <Redirect from={`/${catNum}-`} to={`/${catNum}-0`} />;
+    //if (!subCatNum) return <Redirect from={`/${catNum}`} to={`/${catNum}-0`} />;
     // Если данные еще не пришли, ничего не показываем
     return state === "success" ? (
       <Fragment>
         <Header curCat={categories[catNum]} />
-        <Body categories={categories} catNum={catNum} />
+        <Body categories={categories} catNum={catNum} subCatNum={subCatNum} />
       </Fragment>
     ) : null;
   }
@@ -30,6 +40,8 @@ class Default extends Component {
 // Перерисовка компонента проихсодит только при обновлении этих данных.
 // Вторым аргументом получаем собственные свойства. В этом случае были переданы параметры URL.
 const mapStateToProps = (store, ownProps) => {
+  console.log("Default ownProps");
+  console.log(ownProps.match.params);
   const { catNum, subCatNum } = ownProps.match.params;
   const { categories } = store;
   return {

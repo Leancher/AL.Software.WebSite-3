@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
 import PropTypes from "prop-types";
 import CategoryCaption from "./CategoryCaption";
 import { getCurrentCategory } from "../actions/getCurrentCategory";
@@ -10,6 +9,12 @@ import BuildTileGrid from "./TileGrid";
 const { name, caption, description, isTileGrid } = catPropsName;
 
 export class Content extends React.Component {
+  UNSAFE_componentWillReceiveProps() {
+    return true;
+  }
+  UNSAFE_componentWillUpdate() {
+    return true;
+  }
   componentDidMount() {
     const { catNum, getCurCat } = this.props;
     // Вызываем при первой загрузке страницы, когда никаких данных еще не было
@@ -24,7 +29,7 @@ export class Content extends React.Component {
     if (prevProps.catNum !== catNum) getCurCat(catNum);
   }
   render() {
-    const { subCats, catCaption, catIsTileGrid, state } = this.props;
+    const { catNum, subCats, catCaption, catIsTileGrid, state } = this.props;
     return (
       <React.Fragment>
         {state === "success" ? (
@@ -32,7 +37,7 @@ export class Content extends React.Component {
             <CategoryCaption catCaption={catCaption} />
             <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 no-gutters">
               {catIsTileGrid === "1" ? (
-                <BuildTileGrid subCats={subCats} />
+                <BuildTileGrid catNum={catNum} subCats={subCats} />
               ) : (
                 "currentCategory"
               )}
@@ -45,13 +50,13 @@ export class Content extends React.Component {
 }
 
 const mapStateToProps = (store, ownProps) => {
-  console.log("ownProps");
-  console.log(ownProps);
   const { currentCategory } = store;
-  const { catNum, curCatProps } = ownProps;
-  //const catProps = categories.items[catNum];
+  const { catNum, curCatProps, subCatNum } = ownProps;
+  console.log("subCatNum");
+  console.log(subCatNum);
   return {
     catNum: catNum,
+    subCatNum: subCatNum,
     subCats: currentCategory.items,
     state: currentCategory.state,
     catName: curCatProps[name],
