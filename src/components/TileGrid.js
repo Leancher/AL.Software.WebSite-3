@@ -26,10 +26,10 @@ const buildTailCell = (catNum, subCatNum, name, caption) => {
   );
 };
 
-const TileGrid = ({ catNum, subCats }) => {
+const TileGrid = ({ catNum, subCatsList }) => {
   return (
     <div className="TileGrid">
-      {subCats.map((category, subCatNum) => {
+      {subCatsList.map((category, subCatNum) => {
         //Массив начинается с 0, таблицв БД с 1, первый элемент пустой
         if (subCatNum === 0) return "";
         return buildTailCell(
@@ -44,7 +44,7 @@ const TileGrid = ({ catNum, subCats }) => {
 };
 
 TileGrid.prototypes = {
-  subCats: PropTypes.array.isRequired
+  subCatsList: PropTypes.array.isRequired
 };
 
 export default TileGrid;

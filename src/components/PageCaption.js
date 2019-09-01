@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 // import DropdownMenu from "./DropdownMenu";
 
-function CategoryCaption({ catCaption }) {
+function PageCaption({ caption }) {
   return (
     // Эдемент CategoryCaption будет занимать весь ряд
     <div className="row ">
@@ -26,15 +26,15 @@ function CategoryCaption({ catCaption }) {
             </div>
           </div>
           {/* Элемент caption занимает 10 колонок */}
-          <div className="col-10">{catCaption}</div>
+          <div className="col-10">{caption}</div>
         </div>
       </div>
     </div>
   );
 }
 
-CategoryCaption.prototypes = {
-  catCaption: PropTypes.string.isRequired
+PageCaption.prototypes = {
+  caption: PropTypes.string.isRequired
 };
 
-export default CategoryCaption;
+export default PageCaption;

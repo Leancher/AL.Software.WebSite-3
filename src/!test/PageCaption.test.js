@@ -2,13 +2,13 @@ import React from "react";
 import { shallow } from "enzyme";
 import { shallowToJson } from "enzyme-to-json";
 
-import CategoryCaption from "../components/CategoryCaption";
+import PageCaption from "../components/PageCaption";
 import "../Utilites/setupTest";
 
 let wrapper;
 describe("ComponentTest-CategoryCaption", () => {
   beforeEach(() => {
-    wrapper = shallow(<CategoryCaption catCaption={"Test caption"} />);
+    wrapper = shallow(<PageCaption caption={"Test caption"} />);
   });
 
   it("Render the DUMB component", () => {

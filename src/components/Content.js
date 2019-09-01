@@ -1,12 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import CategoryCaption from "./CategoryCaption";
 import { getCurrentCategory } from "../actions/getCurrentCategory";
 import { catPropsName } from "../Utilites/catPropsName";
-import BuildTileGrid from "./TileGrid";
+import SubCatsList from "./SubCatsList";
 
-const { name, caption, description, isTileGrid } = catPropsName;
+const { name } = catPropsName;
 
 export class Content extends React.Component {
   UNSAFE_componentWillReceiveProps() {
@@ -29,21 +28,19 @@ export class Content extends React.Component {
     if (prevProps.catNum !== catNum) getCurCat(catNum);
   }
   render() {
-    const { catNum, subCats, catCaption, catIsTileGrid, state } = this.props;
+    const { catNum, subCatsList, curCatProps, state, subCatNum } = this.props;
+    // Ждем пока не придут данные и состояние не станет нужным
+    if (state !== "success") return null;
+    // Временно. Если выбрана подкатегория, то показываем ее
+    if (subCatNum !== "0") return null;
+    // Иначе показываем список подкатегорий
     return (
       <React.Fragment>
-        {state === "success" ? (
-          <div className="col-xl-12 col-lg-9 col-md-9 col-sm-9 ContentBlock">
-            <CategoryCaption catCaption={catCaption} />
-            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 no-gutters">
-              {catIsTileGrid === "1" ? (
-                <BuildTileGrid catNum={catNum} subCats={subCats} />
-              ) : (
-                "currentCategory"
-              )}
-            </div>
-          </div>
-        ) : null}
+        <SubCatsList
+          curCatProps={curCatProps}
+          catNum={catNum}
+          subCatsList={subCatsList}
+        />
       </React.Fragment>
     );
   }
@@ -52,18 +49,22 @@ export class Content extends React.Component {
 const mapStateToProps = (store, ownProps) => {
   const { currentCategory } = store;
   const { catNum, curCatProps, subCatNum } = ownProps;
-  console.log("subCatNum");
-  console.log(subCatNum);
+  const subCatsList = currentCategory.items;
+  // Если подкатегорий нет или ее номер "0", то подкатегория пустая
+  const subCat =
+    !subCatsList || subCatNum === "0" ? null : subCatsList[subCatNum];
   return {
     catNum: catNum,
-    subCatNum: subCatNum,
-    subCats: currentCategory.items,
     state: currentCategory.state,
+    // Все свойства категории
+    curCatProps: curCatProps,
+    // Имя категории выделяем отдельно, нужно для получения папки с картинками
     catName: curCatProps[name],
+    // Название страницв выделяем отдельно, общее для всех подкатегорий
     catTitle: curCatProps[name],
-    catCaption: curCatProps[caption],
-    catDesc: curCatProps[description],
-    catIsTileGrid: curCatProps[isTileGrid]
+    subCatNum: subCatNum,
+    subCatsList: subCatsList,
+    subCat: subCat
   };
 };
 
@@ -75,13 +76,13 @@ const mapDispatchToProps = dispatch => {
 
 Content.prototypes = {
   catNum: PropTypes.string.isRequired,
-  subCats: PropTypes.array.isRequired,
   state: PropTypes.string.isRequired,
+  curCatProps: PropTypes.object,
   catName: PropTypes.string.isRequired,
   catTitle: PropTypes.string.isRequired,
-  catCaption: PropTypes.string.isRequired,
-  catDesc: PropTypes.string.isRequired,
-  catIsTileGrid: PropTypes.string.isRequired
+  subCatNum: PropTypes.string.isRequired,
+  subCatsList: PropTypes.array,
+  subCat: PropTypes.array
 };
 
 export default connect(
