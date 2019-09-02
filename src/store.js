@@ -38,3 +38,9 @@ export const curCatInitStore = {
   state: "init",
   error: null
 };
+
+export const photoListInitStore = {
+  items: ["photo1", "photo2"],
+  state: "init",
+  error: null
+};

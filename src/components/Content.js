@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { getCurrentCategory } from "../actions/getCurrentCategory";
 import { catPropsName } from "../Utilites/catPropsName";
 import SubCatsList from "./SubCatsList";
+import SubCategory from "./SubCategory";
 
 const { name } = catPropsName;
 
@@ -28,11 +29,19 @@ export class Content extends React.Component {
     if (prevProps.catNum !== catNum) getCurCat(catNum);
   }
   render() {
-    const { catNum, subCatsList, curCatProps, state, subCatNum } = this.props;
+    const {
+      catNum,
+      subCatsList,
+      curCatProps,
+      state,
+      subCatNum,
+      subCat,
+      catName
+    } = this.props;
     // Ждем пока не придут данные и состояние не станет нужным
     if (state !== "success") return null;
     // Временно. Если выбрана подкатегория, то показываем ее
-    if (subCatNum !== "0") return null;
+    if (subCat) return <SubCategory subCatProps={subCat} catName={catName} />;
     // Иначе показываем список подкатегорий
     return (
       <React.Fragment>
