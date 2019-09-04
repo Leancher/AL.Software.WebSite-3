@@ -25,6 +25,8 @@ export const asyncActionCreator = (dispatch, requestString, type) => {
   });
   return getServerResponse(requestString)
     .then(response => {
+      console.log("response");
+      console.log(response);
       // При удачном ответе, вызываем действие в соответствии с запросом
       dispatch({
         type: type.SUCCESS,

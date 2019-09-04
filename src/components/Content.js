@@ -34,7 +34,6 @@ export class Content extends React.Component {
       subCatsList,
       curCatProps,
       state,
-      subCatNum,
       subCat,
       catName
     } = this.props;

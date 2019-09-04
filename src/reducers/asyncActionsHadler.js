@@ -1,8 +1,7 @@
 import { buildTypesList } from "../actions";
-import { parseCompositeString } from "../Utilites/parseString";
 import { initStore } from "./initStore";
 
-export const actionsHandler = (actionName, initStoreName, parserFunc) => {
+export const asyncActionsHandler = (actionName, initStoreName, parserFunc) => {
   // Получаем список типов действий
   const ACTION_TYPES = buildTypesList(actionName);
   // Возвращем функцию-редьюсер
@@ -22,7 +21,7 @@ export const actionsHandler = (actionName, initStoreName, parserFunc) => {
       // Редьюсер для ответ на конкретные запросы
       case ACTION_TYPES.SUCCESS:
         return Object.assign({}, store, {
-          items: parseCompositeString(action.payload),
+          items: parserFunc(action.payload),
           state: "success",
           error: null
         });

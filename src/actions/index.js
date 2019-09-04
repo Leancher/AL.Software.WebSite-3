@@ -20,7 +20,7 @@ export const buildTypesList = action => {
 const defineAction = (action, catNum, subCatNum) => {
   const actionTypes = buildTypesList(action);
   // Формируем строку запроса
-  const reqStr = buildReqStr(action, catNum);
+  const reqStr = buildReqStr(action, catNum, subCatNum);
   return dispatch => {
     // Вызываем обработчик запросов, аргументы: dispatch для вызова других действий,
     // строка запроса и список действий для обработки результата

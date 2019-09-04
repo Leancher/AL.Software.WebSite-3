@@ -1,15 +1,30 @@
 import { combineReducers } from "redux";
-import { actionsHandler } from "./actionsHadler";
+import { asyncActionsHandler } from "./asyncActionsHadler";
+import {
+  parseCompositeString,
+  parseSimpleString
+} from "../Utilites/parseString";
 
 const buildReducers = () => {
-  const categories = actionsHandler("getCategoriesList", "catsInitStore");
-  const currentCategory = actionsHandler(
+  const categories = asyncActionsHandler(
+    "getCategoriesList",
+    "catsInitStore",
+    parseCompositeString
+  );
+  const currentCategory = asyncActionsHandler(
     "getCurrentCategory",
-    "curCatInitStore"
+    "curCatInitStore",
+    parseCompositeString
+  );
+  const photoList = asyncActionsHandler(
+    "getPhotosList",
+    "photoListInitStore",
+    parseSimpleString
   );
   const reducers = {
     categories,
-    currentCategory
+    currentCategory,
+    photoList
   };
   return reducers;
 };
