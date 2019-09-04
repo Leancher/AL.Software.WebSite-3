@@ -14,7 +14,7 @@ export const buildReqStr = (
 // действие REQUEST_SEND, делаем запрос HTTP.
 // Затем по результатам запроса через промис происходит соответствующее
 // действие.
-export const requestHandler = (dispatch, requestString, type) => {
+export const asyncActionCreator = (dispatch, requestString, type) => {
   // Вызываем действие и сбрасываем состояние
   dispatch({
     type: type.RESET

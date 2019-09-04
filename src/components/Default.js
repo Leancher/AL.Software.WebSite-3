@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import Header from "./Header";
 import Body from "./Body";
-import { getCategoriesList } from "../actions/getCategoriesList";
+import { getCategoriesList } from "../actions";
 
 class Default extends Component {
   UNSAFE_componentWillReceiveProps() {
