@@ -1,10 +1,10 @@
 import React from "react";
 import PageCaption from "./PageCaption";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import { catPropsName } from "../Utilites/catPropsName";
 import PhotoViewer from "./PhotoViewer";
 
-const { caption, isTileGrid, isPhotoAlbum } = catPropsName;
+const { caption, isPhotoAlbum } = catPropsName;
 
 const selectingType = subCatProps => {
   if (subCatProps[isPhotoAlbum] === "1")

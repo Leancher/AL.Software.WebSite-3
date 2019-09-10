@@ -16,7 +16,7 @@ const buildReducers = () => {
     "curCatInitStore",
     parseCompositeString
   );
-  const photoList = asyncActionsHandler(
+  const photosList = asyncActionsHandler(
     "getPhotosList",
     "photoListInitStore",
     parseSimpleString
@@ -24,7 +24,7 @@ const buildReducers = () => {
   const reducers = {
     categories,
     currentCategory,
-    photoList
+    photosList
   };
   return reducers;
 };

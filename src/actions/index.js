@@ -17,7 +17,7 @@ export const buildTypesList = action => {
   return types;
 };
 
-const defineAction = (action, catNum, subCatNum) => {
+const defineAsyncAction = (action, catNum, subCatNum) => {
   const actionTypes = buildTypesList(action);
   // Формируем строку запроса
   const reqStr = buildReqStr(action, catNum, subCatNum);
@@ -28,8 +28,8 @@ const defineAction = (action, catNum, subCatNum) => {
   };
 };
 
-export const getCategoriesList = () => defineAction("getCategoriesList");
+export const getCategoriesList = () => defineAsyncAction("getCategoriesList");
 export const getCurrentCategory = catNum =>
-  defineAction("getCurrentCategory", catNum);
+  defineAsyncAction("getCurrentCategory", catNum);
 export const getPhotosList = (catNum, subCatNum) =>
-  defineAction("getPhotosList", catNum, subCatNum);
+  defineAsyncAction("getPhotosList", catNum, subCatNum);
