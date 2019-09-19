@@ -120,6 +120,10 @@
   padding-right: 3px;
 }
 
+.PhotoViewer {
+  display: flex;
+}
+
 .PhotoPlace {
   text-align: center;
   margin: 0 auto;
@@ -140,6 +144,10 @@
 
 .PhotoCell a:hover {
   color: var(--MyYellow);
+}
+
+.PhotoCell img {
+  cursor: pointer;
 }
 
 .CurrentPhoto {
@@ -166,7 +174,7 @@
     justify-content: flex-start;
   }
   .BtLeftPlace {
-    line-height: 50vh;
+    height: 40vh;
   }
   .BtRightPlace {
     height: 40vh;
@@ -184,7 +192,7 @@
     justify-content: center;
   }
   .BtLeftPlace {
-    line-height: 60vh;
+    height: 50vh;
   }
   .BtRightPlace {
     height: 50vh;
@@ -264,5 +272,14 @@
 }
 
 .BtNext img {
+  margin: auto;
+}
+
+.BtPrev {
+  height: 100%;
+  display: flex;
+}
+
+.BtPrev img {
   margin: auto;
 }

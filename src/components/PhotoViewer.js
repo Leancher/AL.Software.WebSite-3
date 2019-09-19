@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 //import PropTypes from "prop-types";
 import { getPhotosList } from "../actions";
+import PhotoGrid from "./PV-PhotoGrid";
 import { catPropsName } from "../Utilites/catPropsName";
 
 const { catNum, subCatNum, name } = catPropsName;
@@ -12,7 +13,8 @@ const buttons = {
   arrowLDis: "./Pictures/Util/arrowLDis.png",
   arrowRDis: "./Pictures/Util/arrowRDis.png",
   closeEn: "./Pictures/Util/CloseEn.png",
-  closeDis: "./Pictures/Util/CloseDis.png"
+  closeDis: "./Pictures/Util/CloseDis.png",
+  closeEmpty: "./Pictures/Util/CloseEmpty.png"
 };
 
 class PhotoViewer extends React.Component {
@@ -73,41 +75,17 @@ class PhotoViewer extends React.Component {
     photoPlace.src = this.photoPath();
   }
 
-  renderPhotoGrid = () => {
-    const { photosList, catName, subCatNum } = this.props;
-    if (photosList === "") return "В этом альбоме нет картинок";
-
-    return (
-      <div id="Content" className="PhotoPlace">
-        {photosList.map((item, index) => {
-          const picPath = `./Pictures/${catName}/Album${subCatNum}Preview/${item}`;
-          return (
-            <div className="PhotoCell" key={index}>
-              <img
-                id="photo"
-                src={picPath}
-                alt={item}
-                style={{ cursor: "pointer" }}
-                name={index}
-              />
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
-
   renderSinglePhoto = () => {
     const { photosList, catName, subCatNum } = this.props;
     return (
       <React.Fragment>
         <div className="BtLeftPlace BtPlace">
-          <img
-            id="BtPrev"
-            src={buttons.arrowLDis}
-            alt="BtPrev"
-            className="BtPrev"
-          />
+          <div>
+            <img src={buttons.closeEmpty} alt="BtClose" />
+          </div>
+          <div className="BtPrev">
+            <img id="BtPrev" src={buttons.arrowLDis} alt="BtPrev" />
+          </div>
         </div>
         <div className="PhotoPlace">
           <img
@@ -147,7 +125,16 @@ class PhotoViewer extends React.Component {
   };
 
   selectMode() {
-    if (this.state.mode === "photoGrid") return this.renderPhotoGrid();
+    const { photosList, catName, subCatNum } = this.props;
+    if (this.state.mode === "photoGrid")
+      return (
+        <PhotoGrid
+          photosList={photosList}
+          catName={catName}
+          subCatNum={subCatNum}
+          buttonHandler={this.clickButton}
+        />
+      );
     return this.renderSinglePhoto();
   }
 
@@ -156,7 +143,7 @@ class PhotoViewer extends React.Component {
     if (state !== "success") return null;
     return (
       <div
-        style={{ display: "flex" }}
+        className="PhotoViewer"
         onMouseMove={this.setEnablePic}
         onMouseOut={this.setDisablePic}
         onClick={this.clickButton}
