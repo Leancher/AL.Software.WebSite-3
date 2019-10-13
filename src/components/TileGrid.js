@@ -44,6 +44,7 @@ const TileGrid = ({ catNum, subCatsList }) => {
 };
 
 TileGrid.prototypes = {
+  catNum: PropTypes.string.isRequired,
   subCatsList: PropTypes.array.isRequired
 };
 

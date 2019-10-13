@@ -1,26 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { getPhotosList } from "../actions";
 import PhotoGrid from "./PV-PhotoGrid";
+import SinglePhoto from "./PV-SinglePhoto";
 import { catPropsName } from "../Utilites/catPropsName";
 
 const { catNum, subCatNum, name } = catPropsName;
 
-const buttons = {
-  arrowLEn: "./Pictures/Util/arrowLEn.png",
-  arrowREn: "./Pictures/Util/arrowREn.png",
-  arrowLDis: "./Pictures/Util/arrowLDis.png",
-  arrowRDis: "./Pictures/Util/arrowRDis.png",
-  closeEn: "./Pictures/Util/CloseEn.png",
-  closeDis: "./Pictures/Util/CloseDis.png",
-  closeEmpty: "./Pictures/Util/CloseEmpty.png"
-};
-
 class PhotoViewer extends React.Component {
   constructor() {
     super();
-    this.currentPhoto = 0;
+    this.photoNumber = 0;
   }
   state = {
     mode: "photoGrid"
@@ -36,121 +27,50 @@ class PhotoViewer extends React.Component {
     if (prevProps.catNum !== catNum) getPhotosList(catNum, subCatNum);
   }
 
-  setEnablePic = e => {
-    const nameButton = e.target.id;
-    if (nameButton === "BtClose") e.target.src = buttons.closeEn;
-    if (nameButton === "BtPrev") e.target.src = buttons.arrowLEn;
-    if (nameButton === "BtNext") e.target.src = buttons.arrowREn;
+  getPathToPhoto = () => {
+    const { catName, subCatNum } = this.props;
+    return `./Pictures/${catName}/Album${subCatNum}`;
   };
 
-  setDisablePic = e => {
-    if (e.target.id === "BtClose") e.target.src = buttons.closeDis;
-    if (e.target.id === "BtPrev") e.target.src = buttons.arrowLDis;
-    if (e.target.id === "BtNext") e.target.src = buttons.arrowRDis;
-  };
-
-  photoPath = () => {
-    const { catName, subCatNum, photosList } = this.props;
-    const path = `./Pictures/${catName}/Album${subCatNum}/${
-      photosList[this.currentPhoto]
-    }`;
-    return path;
-  };
-
-  showNextPhoto(photoPlace) {
-    this.currentPhoto = Number(this.currentPhoto) + 1;
-    if (this.currentPhoto > this.props.photosList.length - 1) {
-      this.currentPhoto = this.props.photosList.length - 1;
-      return;
-    }
-    photoPlace.src = this.photoPath();
-  }
-
-  showPrevPhoto(photoPlace) {
-    this.currentPhoto -= 1;
-    if (this.currentPhoto < 0) {
-      this.currentPhoto = 0;
-      return;
-    }
-    photoPlace.src = this.photoPath();
-  }
-
-  renderSinglePhoto = () => {
-    const { photosList, catName, subCatNum } = this.props;
-    return (
-      <React.Fragment>
-        <div className="BtLeftPlace BtPlace">
-          <div>
-            <img src={buttons.closeEmpty} alt="BtClose" />
-          </div>
-          <div className="BtPrev">
-            <img id="BtPrev" src={buttons.arrowLDis} alt="BtPrev" />
-          </div>
-        </div>
-        <div className="PhotoPlace">
-          <img
-            className="CurrentPhoto"
-            id="CurrentPhoto"
-            src={this.photoPath()}
-            alt={photosList[this.currentPhoto]}
-          />
-        </div>
-        <div className="BtRightPlace BtPlace">
-          <div>
-            <img id="BtClose" src={buttons.closeDis} alt="BtClose" />
-          </div>
-          <div className="BtNext">
-            <img id="BtNext" src={buttons.arrowRDis} alt="BtNext" />
-          </div>
-        </div>
-      </React.Fragment>
-    );
-  };
-
-  clickButton = e => {
+  onClickBtClose = e => {
     const id = e.target.id;
-    if (id === "BtPrev") {
-      this.showPrevPhoto(e.currentTarget.children[1].children[0]);
-    }
-    if (id === "BtNext") {
-      this.showNextPhoto(e.currentTarget.children[1].children[0]);
-    }
-    if (id === "photo") {
-      this.currentPhoto = e.target.name;
-      this.setState({ mode: "singlePhoto" });
-    }
-    if (id === "BtClose") {
+    if (id === "btClose") {
       this.setState({ mode: "photoGrid" });
     }
   };
 
+  onClickPhoto = e => {
+    const id = e.target.id;
+    if (id === "photo") {
+      this.photoNumber = e.target.name;
+      this.setState({ mode: "singlePhoto" });
+    }
+  };
+
   selectMode() {
-    const { photosList, catName, subCatNum } = this.props;
+    const { photosList } = this.props;
     if (this.state.mode === "photoGrid")
       return (
         <PhotoGrid
           photosList={photosList}
-          catName={catName}
-          subCatNum={subCatNum}
-          buttonHandler={this.clickButton}
+          pathToPhoto={this.getPathToPhoto()}
+          onClickPhoto={this.onClickPhoto}
         />
       );
-    return this.renderSinglePhoto();
+    return (
+      <SinglePhoto
+        photosList={photosList}
+        onClickBtClose={this.onClickBtClose}
+        pathToPhoto={this.getPathToPhoto()}
+        photoNumber={this.photoNumber}
+      />
+    );
   }
 
   render() {
     const { state } = this.props;
     if (state !== "success") return null;
-    return (
-      <div
-        className="PhotoViewer"
-        onMouseMove={this.setEnablePic}
-        onMouseOut={this.setDisablePic}
-        onClick={this.clickButton}
-      >
-        {this.selectMode()}
-      </div>
-    );
+    return this.selectMode();
   }
 }
 
@@ -173,7 +93,14 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-PhotoViewer.prototypes = {};
+PhotoViewer.prototypes = {
+  catNum: PropTypes.string.isRequired,
+  subCatNum: PropTypes.string.isRequired,
+  catName: PropTypes.string.isRequired,
+  state: PropTypes.string.isRequired,
+  curCatProps: PropTypes.object,
+  photosList: PropTypes.array.isRequired
+};
 
 export default connect(
   mapStateToProps,

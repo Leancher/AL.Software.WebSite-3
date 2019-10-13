@@ -122,11 +122,13 @@
 
 .PhotoViewer {
   display: flex;
+  border: 3px solid black;
 }
 
-.PhotoPlace {
+.PhotoGrid {
   text-align: center;
   margin: 0 auto;
+  border: 3px solid red;
 }
 
 .PhotoCell {
@@ -150,15 +152,32 @@
   cursor: pointer;
 }
 
+.SlideShow {
+  display: flex;
+  text-align: center;
+  margin: 0 auto;
+  border: 3px solid red;
+}
+
 .CurrentPhoto {
   display: inline-block;
   margin: 0 auto;
   margin-top: 18px;
 }
 
-.no-gutters {
-  padding-left: 0px;
-  padding-right: 0px;
+.btPlace {
+  margin-top: 18px;
+  width: 50px;
+  display: inline-block;
+  border: 3px solid blue;
+}
+
+.btLeftPlace {
+  margin-right: 5px;
+}
+
+.btRightPlace {
+  margin-left: 5px;
 }
 
 /* Если меньше 1200 */
@@ -173,10 +192,10 @@
   .MenuList a {
     justify-content: flex-start;
   }
-  .BtLeftPlace {
+  .btLeftPlace {
     height: 40vh;
   }
-  .BtRightPlace {
+  .btRightPlace {
     height: 40vh;
   }
 }
@@ -191,10 +210,10 @@
   .MenuList a {
     justify-content: center;
   }
-  .BtLeftPlace {
+  .btLeftPlace {
     height: 50vh;
   }
-  .BtRightPlace {
+  .btRightPlace {
     height: 50vh;
   }
 }
@@ -252,34 +271,25 @@
   color: var(--MyDarkGrey);
 }
 
-.BtPlace {
-  margin-top: 18px;
-  width: 50px;
-  display: inline-block;
+.no-gutters {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
-.BtLeftPlace {
-  margin-right: 5px;
-}
-
-.BtRightPlace {
-  margin-left: 5px;
-}
-
-.BtNext {
+.btNext {
   height: 100%;
   display: flex;
 }
 
-.BtNext img {
+.btNext img {
   margin: auto;
 }
 
-.BtPrev {
+.btPrev {
   height: 100%;
   display: flex;
 }
 
-.BtPrev img {
+.btPrev img {
   margin: auto;
 }

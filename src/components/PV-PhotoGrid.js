@@ -1,14 +1,12 @@
 import React from "react";
-//import PropTypes from "prop-types";
-import { catPropsName } from "../Utilites/catPropsName";
+import PropTypes from "prop-types";
 
-const PhotoGrid = ({ photosList, catName, subCatNum, buttonHandler }) => {
+const PhotoGrid = ({ photosList, pathToPhoto, onClickPhoto }) => {
   if (photosList === "") return "В этом альбоме нет картинок";
-
   return (
-    <div id="Content" className="PhotoPlace">
+    <div id="Content" className="PhotoGrid">
       {photosList.map((item, index) => {
-        const picPath = `./Pictures/${catName}/Album${subCatNum}Preview/${item}`;
+        const picPath = `${pathToPhoto}Preview/${item}`;
         return (
           <div className="PhotoCell" key={index}>
             <img
@@ -16,13 +14,19 @@ const PhotoGrid = ({ photosList, catName, subCatNum, buttonHandler }) => {
               src={picPath}
               alt={item}
               name={index}
-              onClick={buttonHandler}
+              onClick={onClickPhoto}
             />
           </div>
         );
       })}
     </div>
   );
+};
+
+PhotoGrid.prototypes = {
+  photosList: PropTypes.array.isRequired,
+  pathToPhoto: PropTypes.string.isRequired,
+  onClickPhoto: PropTypes.func.isRequired
 };
 
 export default PhotoGrid;

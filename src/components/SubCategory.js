@@ -1,6 +1,6 @@
 import React from "react";
 import PageCaption from "./PageCaption";
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { catPropsName } from "../Utilites/catPropsName";
 import PhotoViewer from "./PhotoViewer";
 
@@ -12,7 +12,7 @@ const selectingType = subCatProps => {
   return "SubCategory";
 };
 
-const SubCategory = ({ subCatProps, catName }) => {
+const SubCategory = ({ subCatProps }) => {
   return (
     <div className="col-xl-12 col-lg-9 col-md-9 col-sm-9 ContentBlock">
       <PageCaption caption={subCatProps[caption]} />
@@ -21,6 +21,10 @@ const SubCategory = ({ subCatProps, catName }) => {
       </div>
     </div>
   );
+};
+
+SubCategory.prototypes = {
+  subCatProps: PropTypes.object.isRequired
 };
 
 export default SubCategory;
