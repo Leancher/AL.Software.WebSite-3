@@ -120,15 +120,9 @@
   padding-right: 3px;
 }
 
-.PhotoViewer {
-  display: flex;
-  border: 3px solid black;
-}
-
 .PhotoGrid {
   text-align: center;
   margin: 0 auto;
-  border: 3px solid red;
 }
 
 .PhotoCell {
@@ -154,22 +148,18 @@
 
 .SlideShow {
   display: flex;
-  text-align: center;
-  margin: 0 auto;
-  border: 3px solid red;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .CurrentPhoto {
-  display: inline-block;
-  margin: 0 auto;
   margin-top: 18px;
 }
 
 .btPlace {
   margin-top: 18px;
   width: 50px;
-  display: inline-block;
-  border: 3px solid blue;
 }
 
 .btLeftPlace {

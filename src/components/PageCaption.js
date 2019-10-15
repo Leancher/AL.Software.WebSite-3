@@ -25,8 +25,12 @@ function PageCaption({ caption }) {
               </div>
             </div>
           </div>
-          {/* Элемент caption занимает 10 колонок */}
-          <div className="col-10">{caption}</div>
+          {/* Элемент caption занимает 8 колонок */}
+          <div className="col-8">{caption}</div>
+          {/* Пустое место, чтобы надпись была по центру страницы */}
+          <div className="col-2">
+            <img src="./Pictures/Util/menuEmpty.png" alt="menu" />
+          </div>
         </div>
       </div>
     </div>
