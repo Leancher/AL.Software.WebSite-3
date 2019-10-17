@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 // import DropdownMenu from "./DropdownMenu";
 
-function PageCaption({ caption }) {
+const PageCaption = ({ caption }) => {
   return (
     // Эдемент CategoryCaption будет занимать весь ряд
     <div className="row ">
       {/* Количество колонок, занимаемых элементом в ряду */}
-      <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ContentCaption">
+      <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ContentCaption CaptionFontSize">
         {/* Внутри колонок вложенный элемент занимает весь ряд */}
         <div className="row">
           {/* Элемент button занимает 2 колонки */}
@@ -26,6 +26,12 @@ function PageCaption({ caption }) {
             </div>
           </div>
           {/* Элемент caption занимает 8 колонок */}
+          {
+            // (fontSize =
+            //   "col-8" + caption.length > 34
+            //     ? " CaptionFontSize"
+            //     : " CaptionFontSizeSmall")
+          }
           <div className="col-8">{caption}</div>
           {/* Пустое место, чтобы надпись была по центру страницы */}
           <div className="col-2">
@@ -35,7 +41,7 @@ function PageCaption({ caption }) {
       </div>
     </div>
   );
-}
+};
 
 PageCaption.prototypes = {
   caption: PropTypes.string.isRequired

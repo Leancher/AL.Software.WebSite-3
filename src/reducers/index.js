@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { asyncActionsHandler } from "./asyncActionsHadler";
+import { asyncActionsHandler } from "./asyncActionsHandler";
 import {
   parseCompositeString,
   parseSimpleString
