@@ -4,6 +4,7 @@ import { catPropsName } from "../Utilites/catPropsName";
 
 const { subCatNum, name } = catPropsName;
 
+// Динамический импорт компонента
 const Article = ({ subCatProps }) => {
   const catName = subCatProps[name];
   const number = subCatProps[subCatNum];

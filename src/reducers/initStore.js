@@ -34,5 +34,10 @@ export const initStore = {
     items: ["photo1", "photo2"],
     state: "init",
     error: null
+  },
+  notePreviewInitStore: {
+    items: ["note1", "note2"],
+    state: "init",
+    error: null
   }
 };

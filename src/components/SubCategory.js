@@ -5,16 +5,17 @@ import { catPropsName } from "../Utilites/catPropsName";
 import PhotoViewer from "./PhotoViewer";
 import Article from "./Article";
 
-const { caption, isPhotoAlbum, isArticle } = catPropsName;
+const { caption, isPhotoAlbum, isArticle, subCatNum } = catPropsName;
 
 const selectingType = subCatProps => {
+  console.log("selectingType subCatNum");
+  console.log(subCatProps[subCatNum]);
   if (subCatProps[isPhotoAlbum] === "1") {
     return <PhotoViewer subCatProps={subCatProps} />;
   }
   if (subCatProps[isArticle] === "1") {
     return <Article subCatProps={subCatProps} />;
   }
-
   return "SubCategory";
 };
 

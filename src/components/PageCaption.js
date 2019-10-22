@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 // import DropdownMenu from "./DropdownMenu";
 
 const PageCaption = ({ caption }) => {
+  // Устанавливаем размер шрифта в зависимости от длины заголовка
+  let fontSize = { fontSize: "36px" };
+  if (caption.length > 34) fontSize = { fontSize: "24px" };
+
   return (
     // Эдемент CategoryCaption будет занимать весь ряд
     <div className="row ">
@@ -26,13 +30,9 @@ const PageCaption = ({ caption }) => {
             </div>
           </div>
           {/* Элемент caption занимает 8 колонок */}
-          {
-            // (fontSize =
-            //   "col-8" + caption.length > 34
-            //     ? " CaptionFontSize"
-            //     : " CaptionFontSizeSmall")
-          }
-          <div className="col-8">{caption}</div>
+          <div className="col-8" style={fontSize}>
+            {caption}
+          </div>
           {/* Пустое место, чтобы надпись была по центру страницы */}
           <div className="col-2">
             <img src="./Pictures/Util/menuEmpty.png" alt="menu" />

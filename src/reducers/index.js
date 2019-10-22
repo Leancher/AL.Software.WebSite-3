@@ -21,10 +21,16 @@ const buildReducers = () => {
     "photoListInitStore",
     parseSimpleString
   );
+  const notesPreviewList = asyncActionsHandler(
+    "getNotesPreview",
+    "notePreviewInitStore",
+    parseCompositeString
+  );
   const reducers = {
     categories,
     currentCategory,
-    photosList
+    photosList,
+    notesPreviewList
   };
   return reducers;
 };
